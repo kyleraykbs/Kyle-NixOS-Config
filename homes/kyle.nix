@@ -212,6 +212,7 @@ in rec {
     bindm = $mainMod, mouse:273, resizewindow
 
     exec = swaybg -i "${settings.style.wallpaperpath}"
+    exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
   '';
 
   services = {
