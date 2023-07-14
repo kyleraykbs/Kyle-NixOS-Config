@@ -1,4 +1,6 @@
-{config, pkgs, ...}: let settings = (import ../settings.nix); in {
+{config, pkgs, inputs, ...}: let 
+  settings = (import ../settings.nix); 
+in rec {
   home.username = "kyle";
   home.homeDirectory = "/home/kyle";
 
@@ -6,8 +8,43 @@
 
   programs.home-manager.enable = true;
 
-  imports = [
-  ];
+  imports = [];
+
+  stylix.image = settings.style.wallpaper;
+  stylix.polarity = "dark";
+  stylix.targets.gtk.enable = true;
+  stylix.targets.vscode.enable = true;
+  stylix.targets.kitty.enable = true;
+  stylix.targets.kde.enable = true;
+  stylix.opacity.terminal = 0.75;
+  stylix.opacity.applications = 0.75;
+  stylix.fonts.sizes.applications = 10;
+  stylix.targets.waybar = {
+    enable = true;
+    enableCenterBackColors = true;
+    enableLeftBackColors = true;
+    enableRightBackColors = true;
+  };
+
+  home.file = {
+	".config/qt5ct/colors/oomox-current.conf".source = config.lib.stylix.colors {
+	        template = builtins.readFile ../desktop/theme/autowallpaper/qt-oomox.conf.mustache;
+	        extension = ".conf";
+	      };
+    ".config/Trolltech.conf".source = config.lib.stylix.colors {
+	        template = builtins.readFile ../desktop/theme/autowallpaper/qt.conf.mustache;
+	        extension = ".conf";
+	      };
+    ".config/kdeglobals".source = config.lib.stylix.colors {
+	        template = builtins.readFile ../desktop/theme/autowallpaper/qt.conf.mustache;
+	        extension = "";
+	      };
+    ".config/qt5ct/qt5ct.conf".text = pkgs.lib.mkBefore (builtins.readFile ../desktop/theme/autowallpaper/qt5ct.conf.mustache);
+  };
+
+  home.sessionVariables = {
+    QT_QPA_PLATFORMTHEME="qt5ct"; # if this doesnt work properly on hyprland you must add env = QT_QPA_PLATFORMTHEME,qt5ct to your hyprland.conf
+  };
 
   home.file.".config/hypr/hyprland.conf".text = ''
     # This is an example Hyprland config file.
@@ -20,7 +57,8 @@
     #
 
     # See https://wiki.hyprland.org/Configuring/Monitors/
-    monitor=,highrr,auto,auto
+    monitor=,preffered,auto,auto
+    monitor=HDMI-A-1,highrr,auto,auto
 
 
     # See https://wiki.hyprland.org/Configuring/Keywords/ for more
@@ -33,6 +71,7 @@
 
     # Some default env vars.
     env = XCURSOR_SIZE,24
+    env = QT_QPA_PLATFORMTHEME,qt5ct
 
     # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
     input {
@@ -57,8 +96,8 @@
         gaps_in = 5
         gaps_out = 20
         border_size = ${settings.style.border_size}
-        col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-        col.inactive_border = rgba(595959aa)
+        col.active_border = rgba(${config.lib.stylix.colors.base0A-hex}ee) rgba(${config.lib.stylix.colors.base09-hex}ee) 45deg
+        col.inactive_border = rgba(${config.lib.stylix.colors.base0D-hex}96)
 
         layout = dwindle
     }
@@ -172,23 +211,8 @@
     bindm = $mainMod, mouse:272, movewindow
     bindm = $mainMod, mouse:273, resizewindow
 
-    exec = swww init; sleep 1; swww img "${settings.style.wallpaperpath}"
+    exec = swaybg -i "${settings.style.wallpaperpath}"
   '';
-
-  stylix.image = settings.style.wallpaper;
-  stylix.polarity = "dark";
-  stylix.targets.gtk.enable = true;
-  stylix.targets.vscode.enable = true;
-  stylix.targets.kitty.enable = true;
-  stylix.targets.kde.enable = true;
-  stylix.opacity.terminal = 0.75;
-  stylix.opacity.applications = 0.75;
-  stylix.targets.waybar = {
-    enable = true;
-    enableCenterBackColors = true;
-    enableLeftBackColors = true;
-    enableRightBackColors = true;
-  };
 
   services = {
     kdeconnect = {

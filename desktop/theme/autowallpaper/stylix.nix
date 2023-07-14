@@ -1,4 +1,4 @@
-{inputs, config, pkgs, ...}: {
-  stylix.image = ../wallpaper.jpg;
+{inputs, config, pkgs, ...}: let settings = (import ../../../settings.nix); in {
+  stylix.image = settings.style.wallpaper;
   stylix.polarity = "dark";
 }

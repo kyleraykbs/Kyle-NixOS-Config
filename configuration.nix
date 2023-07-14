@@ -29,13 +29,9 @@
       qt5ct
       qt6ct
       libsForQt5.qtstyleplugins
+      libsForQt5.kdenlive
+      swaybg
     ];
-  };
-
-  qt = {
-    enable = true;
-    style = "gtk2";
-    platformTheme = "gtk2";
   };
 
   fonts.fonts = with pkgs; [

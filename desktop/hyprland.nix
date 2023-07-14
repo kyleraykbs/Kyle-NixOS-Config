@@ -5,6 +5,7 @@
     vaapiVdpau
     slurp
     polkit_gnome
+    wlr-randr
   ];
 
   systemd = {
