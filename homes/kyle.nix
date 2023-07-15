@@ -8,11 +8,53 @@ in rec {
 
   programs.home-manager.enable = true;
 
+  home.packages = with pkgs; [
+    qogir-icon-theme
+    quintom-cursor-theme
+    authenticator
+  ];
+
+  gtk = {
+    enable = true;
+    iconTheme.name = "Qogir";
+    cursorTheme.name = "Qogir";
+  };
+
+
   imports = [];
 
   stylix.image = settings.style.wallpaper;
   stylix.polarity = "dark";
   stylix.targets.gtk.enable = true;
+  stylix.targets.gtk.extraCss = ''
+    window.ssd separator:first-child + headerbar:backdrop,  
+    window.ssd separator:first-child + headerbar,  
+    window.ssd headerbar:first-child:backdrop,  
+    window.ssd headerbar:first-child,  
+    window.ssd headerbar:last-child:backdrop,  
+    window.ssd headerbar:last-child,  
+    window.ssd stack headerbar:first-child:backdrop,  
+    window.ssd stack headerbar:first-child,  
+    window.ssd stack headerbar:last-child:backdrop,  
+    window.ssd stack headerbar:last-child,  
+    window.ssd decoration,  
+    window.ssd headerbar.titlebar {  
+      border-radius: 0.0px;  
+    }  
+    window.ssd headerbar * {  
+      margin-top: -100px;  
+      color: #000000;  
+    }  
+    window.ssd headerbar.titlebar,  
+    window.ssd headerbar.titlebar button.titlebutton {  
+      border: none;  
+      font-size: 0;  
+      margin: 0;  
+      min-height: 0;  
+      padding: 0;  
+      color: #000000;  
+    }
+  '';
   stylix.targets.vscode.enable = true;
   stylix.targets.kitty.enable = true;
   stylix.targets.kde.enable = true;
@@ -58,7 +100,10 @@ in rec {
 
     # See https://wiki.hyprland.org/Configuring/Monitors/
     monitor=,preffered,auto,auto
-    monitor=HDMI-A-1,highrr,auto,auto
+    monitor=DP-1, highrr, auto, 1
+    #monitor=HDMI-A-1, 1920x1080@60, 0x0, 1
+    #monitor=HDMI-A-1,transform,1
+    #monitor=DVI-D-2, preffered, 3840x0, 1
 
 
     # See https://wiki.hyprland.org/Configuring/Keywords/ for more
@@ -82,12 +127,12 @@ in rec {
         kb_rules =
 
         follow_mouse = 1
+        sensitivity = -0.3
+        repeat_rate = 50
 
         touchpad {
             natural_scroll = false
         }
-
-        sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
     }
 
     general {
@@ -96,8 +141,8 @@ in rec {
         gaps_in = 5
         gaps_out = 20
         border_size = ${settings.style.border_size}
-        col.active_border = rgba(${config.lib.stylix.colors.base0A-hex}ee) rgba(${config.lib.stylix.colors.base09-hex}ee) 45deg
-        col.inactive_border = rgba(${config.lib.stylix.colors.base0D-hex}96)
+        col.active_border = rgba(${config.lib.stylix.colors.base0A-hex}ee) rgba(${config.lib.stylix.colors.base08-hex}ee) 45deg
+        col.inactive_border = rgba(${config.lib.stylix.colors.base00-hex}96)
 
         layout = dwindle
     }
@@ -105,11 +150,13 @@ in rec {
     decoration {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-        rounding = 10
+        rounding = 0
         blur = true
-        blur_size = 3
+        blur_size = 5
         blur_passes = 2
         blur_new_optimizations = true
+        inactive_opacity = 0.85
+        active_opacity = 0.9
 
         drop_shadow = true
         shadow_range = 4
@@ -210,6 +257,34 @@ in rec {
     # Move/resize windows with mainMod + LMB/RMB and dragging
     bindm = $mainMod, mouse:272, movewindow
     bindm = $mainMod, mouse:273, resizewindow
+
+    ### kitty
+    windowrule = animation popin,^(kitty)$ # sets the animation style for kitty
+    windowrule = float,^(kitty)$
+    windowrule = size 50% 50%,^(kitty)$
+    windowrule = move cursor -50% -50%,^(kitty)$ # moves kitty to the center of the cursor
+    #########
+
+    ### ffplay
+    # windowrule = animation popin,^(ffplay)$
+    # windowrule = float,^(ffplay)$
+    # windowrule = size 100% 100%,^(ffplay)$
+    # windowrule = move 13% 100%,^(ffplay)$
+    # windowrule = monitor 2,^(ffplay)$
+    # windowrule = pin,^(ffplay)$
+    # windowrule = noborder,^(ffplay)$
+    #########
+
+    ## opacity ##
+    windowrule=opacity 0.9 override 0.85 override,^(code-url-handler)$
+    windowrule=opacity 0.9,^(pcmanfm)$
+    windowrule=opacity 0.925,^(rofi)$
+    windowrule=opacity 0.925,^(lutris)$
+    windowrule=opacity 0.925,^(org.rncbc.qpwgraph)$
+    windowrule=opacity 0.925,^(file-roller)$
+    windowrule=opacity 0.925,^(filezilla)$
+    windowrule=opacity 0.925,^(Bless)$
+    #############
 
     exec = swaybg -i "${settings.style.wallpaperpath}"
     exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1

@@ -91,6 +91,8 @@
     github-desktop
     git
     htop
+    nix-index
+    pciutils
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;

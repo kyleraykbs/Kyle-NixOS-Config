@@ -31,8 +31,20 @@
       libsForQt5.qtstyleplugins
       libsForQt5.kdenlive
       swaybg
+      pavucontrol
+      helvum
     ];
   };
+
+  security.sudo.extraRules= [
+  {  users = [ "kyle" ];
+    commands = [
+       { command = "ALL" ;
+         options= [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea
+      }
+    ];
+  }
+];
 
   fonts.fonts = with pkgs; [
     nerdfonts
