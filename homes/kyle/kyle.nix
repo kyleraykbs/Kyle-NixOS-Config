@@ -1,5 +1,9 @@
 {config, pkgs, inputs, ...}: let 
-  settings = (import ../settings.nix); 
+  settings = (import ../../settings.nix); 
+  systemhome = if (settings.hostname == "comet") then 
+                  (import ./cometsettings.nix)
+               else if (settings.hostname == "rutabega") then 
+                  (import ./rutabegasettings.nix) else {};
 in rec {
   home.username = "kyle";
   home.homeDirectory = "/home/kyle";
@@ -12,6 +16,17 @@ in rec {
     qogir-icon-theme
     quintom-cursor-theme
     authenticator
+    clipman
+    libsForQt5.kcmutils
+    libsForQt5.kirigami-addons
+    libsForQt5.kpeoplevcard
+    libfakekey
+    libsForQt5.modemmanager-qt
+    libsForQt5.pulseaudio-qt
+    libsForQt5.qca-qt5
+    libsForQt5.qqc2-desktop-style
+    libsForQt5.qt5.qttools
+    libsForQt5.kdeconnect-kde
   ];
 
   gtk = {
@@ -70,18 +85,18 @@ in rec {
 
   home.file = {
 	".config/qt5ct/colors/oomox-current.conf".source = config.lib.stylix.colors {
-	        template = builtins.readFile ../desktop/theme/autowallpaper/qt-oomox.conf.mustache;
+	        template = builtins.readFile ../../desktop/theme/autowallpaper/qt-oomox.conf.mustache;
 	        extension = ".conf";
 	      };
     ".config/Trolltech.conf".source = config.lib.stylix.colors {
-	        template = builtins.readFile ../desktop/theme/autowallpaper/qt.conf.mustache;
+	        template = builtins.readFile ../../desktop/theme/autowallpaper/qt.conf.mustache;
 	        extension = ".conf";
 	      };
     ".config/kdeglobals".source = config.lib.stylix.colors {
-	        template = builtins.readFile ../desktop/theme/autowallpaper/qt.conf.mustache;
-	        extension = "";
+	        template = builtins.readFile ../../desktop/theme/autowallpaper/qt.conf.mustache;
+	        extension = ""; 
 	      };
-    ".config/qt5ct/qt5ct.conf".text = pkgs.lib.mkBefore (builtins.readFile ../desktop/theme/autowallpaper/qt5ct.conf.mustache);
+    ".config/qt5ct/qt5ct.conf".text = pkgs.lib.mkBefore (builtins.readFile ../../desktop/theme/autowallpaper/qt5ct.conf.mustache);
   };
 
   home.sessionVariables = {
@@ -100,11 +115,6 @@ in rec {
 
     # See https://wiki.hyprland.org/Configuring/Monitors/
     monitor=,preffered,auto,auto
-    monitor=DP-1, highrr, auto, 1
-    #monitor=HDMI-A-1, 1920x1080@60, 0x0, 1
-    #monitor=HDMI-A-1,transform,1
-    #monitor=DVI-D-2, preffered, 3840x0, 1
-
 
     # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
@@ -117,6 +127,20 @@ in rec {
     # Some default env vars.
     env = XCURSOR_SIZE,24
     env = QT_QPA_PLATFORMTHEME,qt5ct
+    env = LIBSEAT_BACKEND,logind
+    env = LIBVA_DRIVER_NAME,nvidia
+    env = XDG_SESSION_TYPE,wayland
+    env = XDG_CURRENT_DESKTOP,Hyprland
+    env = XDG_SESSION_DESKTOP,Hyprland
+    env = GBM_BACKEND,nvidia-drm
+    env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+    env = WLR_NO_HARDWARE_CURSORS,1
+    env = __GL_VRR_ALLOWED,0
+    env = GDK_BACKEND,wayland
+    env = QT_AUTO_SCREEN_SCALE_FACTOR,1
+    env = QT_QPA_PLATFORM,wayland;xcb
+    env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
+    env = MOZ_ENABLE_WAYLAND,1
 
     # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
     input {
@@ -142,7 +166,7 @@ in rec {
         gaps_out = 20
         border_size = ${settings.style.border_size}
         col.active_border = rgba(${config.lib.stylix.colors.base0A-hex}ee) rgba(${config.lib.stylix.colors.base08-hex}ee) 45deg
-        col.inactive_border = rgba(${config.lib.stylix.colors.base00-hex}96)
+        col.inactive_border = rgba(000000D2)
 
         layout = dwindle
     }
@@ -150,10 +174,10 @@ in rec {
     decoration {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-        rounding = 0
+        rounding = 4
         blur = true
         blur_size = 5
-        blur_passes = 2
+        blur_passes = 3
         blur_new_optimizations = true
         inactive_opacity = 0.85
         active_opacity = 0.9
@@ -288,13 +312,11 @@ in rec {
 
     exec = swaybg -i "${settings.style.wallpaperpath}"
     exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
+    exec-once = ${pkgs.libsForQt5.kdeconnect-kde}/libexec/kdeconnectd
+    ${systemhome.hyprconfig}
   '';
 
-  services = {
-    kdeconnect = {
-      enable = true;
-    };
-  };
+  # services.kdeconnect.enable = true;
 
   programs = {
     firefox = {

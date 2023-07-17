@@ -37,14 +37,14 @@
   };
 
   security.sudo.extraRules= [
-  {  users = [ "kyle" ];
-    commands = [
-       { command = "ALL" ;
-         options= [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea
-      }
-    ];
-  }
-];
+  { users = [ "kyle" ];
+      commands = [
+        { command = "ALL" ;
+        options= [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea
+        }
+      ];
+    }
+  ];
 
   fonts.fonts = with pkgs; [
     nerdfonts

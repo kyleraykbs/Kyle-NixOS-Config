@@ -28,7 +28,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {};
-              home-manager.users.kyle = import ./homes/kyle.nix;
+              home-manager.users.kyle = import ./homes/kyle/kyle.nix;
             }
           ];
         };
