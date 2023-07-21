@@ -1,0 +1,6 @@
+{
+  imports = [
+    ./stylix
+    ./base.nix
+  ];
+}

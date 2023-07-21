@@ -12,26 +12,25 @@
     let
       system = "x86_64-linux";
       specialArgs = { inherit inputs self; };
+
+      mkNixos = system: config: nixpkgs.lib.nixosSystem {
+        inherit specialArgs system;
+        modules = [ ./modules/nixos config ];
+      };
+
+      mkHome = config: home-manager.lib.homeManagerConfiguration {
+        pkgs = fpkgs;
+        extraSpecialArgs = specialArgs;
+        modules = [ ./overlays.nix ./modules/home config ];
+      };
     in {
+
       nixosConfigurations = {
-        comet = nixpkgs.lib.nixosSystem {
-          inherit specialArgs system;
-          modules = [
-            ./desktop/hyprland.nix
-            ./hardware/nvidia.nix
-            ./configuration.nix
-            inputs.stylix.nixosModules.stylix
-            ./software/emulation/virtual-machines.nix
-            ./desktop/theme/autowallpaper/stylix.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {};
-              home-manager.users.kyle = import ./homes/kyle/kyle.nix;
-            }
-          ];
-        };
+        comet = mkNixos "x86_64-linux" ./hosts/comet;
+      };
+
+      homeConfigurations = {
+        "kyle@comet" = mkHome ./home/kyle/comet.nix;
       };
     };
 }

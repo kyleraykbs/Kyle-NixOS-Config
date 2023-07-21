@@ -20,19 +20,7 @@
     description = "Kyle Kubis";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     packages = with pkgs; [
-      pcmanfm
-      firefox
-      discord
-      github-desktop
-      swww
-      keepassxc
-      qt5ct
-      qt6ct
-      libsForQt5.qtstyleplugins
-      libsForQt5.kdenlive
-      swaybg
-      pavucontrol
-      helvum
+      
     ];
   };
 
