@@ -1,10 +1,13 @@
 {pkgs, config, inputs, ...}: {
   imports = [inputs.stylix.nixosModules.stylix];
   base.user.kyle.enable = true;
-  users.users.kyle = {
-    isNormalUser = true;
-    description = "Kyle Kubis";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+  users = {
+    defaultUserShell=pkgs.fish;
+    users.kyle = {
+      isNormalUser = true;
+      description = "Kyle Kubis";
+      extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    };
   };
   
   security.sudo.extraRules= [
@@ -16,6 +19,10 @@
         ];
       }
   ];
+
+  programs = {
+    fish = { enable = true; };
+  };
 
   stylix.image = config.base.wallpaper;
   stylix.polarity = "dark";

@@ -1,5 +1,5 @@
 {
   style = rec {
-    wallpaper = ./wallpaper.png;
+    wallpaper = ./wallpaper/1.png;
   };
 }

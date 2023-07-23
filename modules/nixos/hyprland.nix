@@ -20,7 +20,7 @@ in
     style = {
       border_size = mkOption {
         type = types.int;
-        default = 4; 
+        default = 3; 
       };
 
       border_color_1 = mkOption {
@@ -132,7 +132,7 @@ in
           gaps_out = 20
           border_size = ${builtins.toString cfg.style.border_size}
           col.active_border = rgba(${cfg.style.border_color_1}ee) rgba(${cfg.style.border_color_2}ee) 45deg
-          col.inactive_border = rgba(000000D2)
+          col.inactive_border = rgba(595959aa)
 
           layout = dwindle
       }

@@ -36,6 +36,7 @@
     pavucontrol
     helvum
     comma
+    git-lfs
   ];
 
   base.stylix.enable = true;
