@@ -41,6 +41,25 @@ in
   };
 
   config = mkIf cfg.user.kyle.enable {
+    users = {
+      defaultUserShell=pkgs.fish;
+      users.kyle = {
+        isNormalUser = true;
+        description = "Kyle Kubis";
+        extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+      };
+    };
+    
+    security.sudo.extraRules= [
+      { users = [ "kyle" ];
+          commands = [
+            { command = "ALL" ;
+              options= [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea
+            }
+          ];
+        }
+    ];
+
     home-manager.extraSpecialArgs = { inherit inputs self; };
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;

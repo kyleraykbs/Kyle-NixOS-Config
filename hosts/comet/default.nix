@@ -8,6 +8,8 @@
   ];
 
   networking.hostName = "comet";
+  
+  base.user.kyle.enable = true;
 
   base.hyprland.enable = true;
   base.hyprland.extraConfig = ''

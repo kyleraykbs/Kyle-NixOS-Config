@@ -1,24 +1,5 @@
 {pkgs, config, inputs, ...}: {
   imports = [inputs.stylix.nixosModules.stylix];
-  base.user.kyle.enable = true;
-  users = {
-    defaultUserShell=pkgs.fish;
-    users.kyle = {
-      isNormalUser = true;
-      description = "Kyle Kubis";
-      extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
-    };
-  };
-  
-  security.sudo.extraRules= [
-    { users = [ "kyle" ];
-        commands = [
-          { command = "ALL" ;
-            options= [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea
-          }
-        ];
-      }
-  ];
 
   programs = {
     fish = { enable = true; };
@@ -93,6 +74,9 @@
     htop
     nix-index
     pciutils
+    zip
+    unzip
+    jdk17
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;

@@ -37,6 +37,7 @@
     helvum
     comma
     git-lfs
+    mate.engrampa
   ];
 
   base.stylix.enable = true;
