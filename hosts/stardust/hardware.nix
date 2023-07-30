@@ -24,6 +24,15 @@
     [ { device = "/dev/disk/by-uuid/63742d2f-5863-4624-adb4-eb31517bd8a6"; }
     ];
 
+    # Setup keyfile
+  boot.initrd.secrets = {
+    "/crypto_keyfile.bin" = null;
+  };
+
+  # Enable swap on luks
+  boot.initrd.luks.devices."luks-0646a84a-36f8-48e4-8666-1e3d3570d79a".device = "/dev/disk/by-uuid/0646a84a-36f8-48e4-8666-1e3d3570d79a";
+  boot.initrd.luks.devices."luks-0646a84a-36f8-48e4-8666-1e3d3570d79a".keyFile = "/crypto_keyfile.bin";
+
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
