@@ -7,6 +7,8 @@ let
     mkOption
     types
     ;
+  
+  isHidpi = config.base.hidpi.enable;
 
   cfg = config.base.hyprland;
 in

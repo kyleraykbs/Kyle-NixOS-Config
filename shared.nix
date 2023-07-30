@@ -1,5 +1,5 @@
 {
   style = rec {
-    wallpaper = ./wallpaper/epic-wallpaper.jpg;
+    wallpaper = ./wallpaper/1.png;
   };
 }
