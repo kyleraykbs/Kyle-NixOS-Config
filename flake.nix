@@ -28,11 +28,13 @@
       nixosConfigurations = {
         comet = mkNixos "x86_64-linux" ./hosts/comet;
         baha-blast = mkNixos "x86_64-linux" ./hosts/baha-blast;
+        stardust = mkNixos "x86_64-linux" ./hosts/stardust;
       };
 
       homeConfigurations = {
         "kyle@comet" = mkHome ./home/kyle/comet.nix;
         "luna@baha-blast" = mkHome ./home/luna/baha-blast.nix;
+        "kyle@stardust" = mkHome ./home/kyle/stardust.nix;
       };
     };
 }
