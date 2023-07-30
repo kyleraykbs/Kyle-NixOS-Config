@@ -27,12 +27,14 @@
 
       nixosConfigurations = {
         comet = mkNixos "x86_64-linux" ./hosts/comet;
+        citadel-core = mkNixos "x86_64-linux" ./hosts/citadel-core;
         baha-blast = mkNixos "x86_64-linux" ./hosts/baha-blast;
         stardust = mkNixos "x86_64-linux" ./hosts/stardust;
       };
 
       homeConfigurations = {
         "kyle@comet" = mkHome ./home/kyle/comet.nix;
+        "george@citadel-core" = mkHome ./home/george/citadel-core.nix;
         "luna@baha-blast" = mkHome ./home/luna/baha-blast.nix;
         "kyle@stardust" = mkHome ./home/kyle/stardust.nix;
       };
