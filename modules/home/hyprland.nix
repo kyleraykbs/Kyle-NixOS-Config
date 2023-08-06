@@ -55,7 +55,6 @@ in
           # See https://wiki.hyprland.org/Configuring/Keywords/ for more
           $mainMod = ALT
 
-          # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
           bind = $mainMod, RETURN, exec, kitty
           bind = $mainMod, C, killactive,
           bind = $mainMod, M, exit,
@@ -241,7 +240,6 @@ in
 
       ${cfg.config.binds}
 
-      bind = $mainMod, RETURN, exec, kitty
       bind = ${cfg.config.screenshot.keybind},exec,slurp | grim -g - ${cfg.config.screenshot.output_path}/$(date +'screenshot_%Y-%m-%d-%H%M%S.png'); wl-copy < ${cfg.config.screenshot.output_path}/$(ls ${cfg.config.screenshot.output_path}/ -tp | head -1)
 
       ### kitty
