@@ -18,16 +18,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      wofi
-      wl-clipboard
-      vaapiVdpau
-      slurp
-      polkit_gnome
-      wlr-randr
-      grim
-    ];
-
     programs.hyprland = {
       enable = true;
 

@@ -19,6 +19,7 @@ in
       type = types.str;
       default = "";
     };
+
     style = {
       border_size = mkOption {
         type = types.int;
@@ -46,6 +47,18 @@ in
         output_path = mkOption {
           type = types.str;
           default = "~/Documents/Pictures/Screenshots";
+        };
+      };
+
+      screenshare = {
+        enable = mkOption {
+          type = types.bool;
+          default = true;
+        };
+
+        keybind = mkOption {
+          type = types.str;
+          default = "$mainMod, A";
         };
       };
 
@@ -106,6 +119,18 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      wofi
+      wl-clipboard
+      vaapiVdpau
+      slurp
+      polkit_gnome
+      wlr-randr
+      grim
+      (if cfg.config.screenshare.enable then jellyfin-ffmpeg else null)
+      (if cfg.config.screenshare.enable then killall else null)
+    ];
+
     programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [
       wlrobs
     ];
@@ -240,6 +265,7 @@ in
 
       ${cfg.config.binds}
 
+      ${(if cfg.config.screenshare.enable then ''bind = ${cfg.config.screenshare.keybind},exec,killall -9 ffplay; ffplay /dev/$(ls /dev/ | grep "video" | tail -1)'' else "")}
       bind = ${cfg.config.screenshot.keybind},exec,slurp | grim -g - ${cfg.config.screenshot.output_path}/$(date +'screenshot_%Y-%m-%d-%H%M%S.png'); wl-copy < ${cfg.config.screenshot.output_path}/$(ls ${cfg.config.screenshot.output_path}/ -tp | head -1)
 
       ### kitty
@@ -249,15 +275,17 @@ in
       windowrule = move cursor -50% -50%,^(kitty)$ # moves kitty to the center of the cursor
       #########
 
+      ${(if cfg.config.screenshare.enable then ''
       ### ffplay
-      # windowrule = animation popin,^(ffplay)$
-      # windowrule = float,^(ffplay)$
-      # windowrule = size 100% 100%,^(ffplay)$
-      # windowrule = move 13% 100%,^(ffplay)$
+      windowrule = animation popin,^(ffplay)$
+      windowrule = float,^(ffplay)$
+      windowrule = size 100% 100%,^(ffplay)$
+      windowrule = move 13% 100%,^(ffplay)$
       # windowrule = monitor 2,^(ffplay)$
-      # windowrule = pin,^(ffplay)$
-      # windowrule = noborder,^(ffplay)$
+      windowrule = pin,^(ffplay)$
+      windowrule = noborder,^(ffplay)$
       #########
+      '' else "")}
 
       ## opacity ##
       windowrule=opacity 0.9 override 0.85 override,^(code-url-handler)$
