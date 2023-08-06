@@ -41,6 +41,8 @@
 
   base.stylix.enable = true;
 
+  base.hyprland.enable = true;
+
   programs = {
     firefox = {
       enable = true;
