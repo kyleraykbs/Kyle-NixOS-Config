@@ -26,7 +26,6 @@
     helvum
     comma
     git-lfs
-    mate.engrampa
   ];
 
   base.pcmanfm.enable = true;
