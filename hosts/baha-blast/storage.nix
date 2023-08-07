@@ -9,5 +9,8 @@
       fsType = "vfat";
     };
 
-  swapDevices = [ ];
+  swapDevices = [{
+    device="/var/lib/swapfile";
+    side = 16*1024;
+  }];
 }

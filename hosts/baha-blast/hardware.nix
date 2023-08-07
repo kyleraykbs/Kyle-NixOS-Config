@@ -9,9 +9,19 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" "rtsx_usb_sdmmc" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [
+    "vfio"
+    "vfio_pci"
+  ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.kernelParams = [ 
+    "intel_iommu=on" 
+    # "iommu=pt"
+    # "pcie_acs_override=downstream,multifunction" 
+    # "kvm.ignore_msrs=1" 
+    "vfio-pci.ids=10de:1f99,10de:10fa"
+  ];
 
 
 

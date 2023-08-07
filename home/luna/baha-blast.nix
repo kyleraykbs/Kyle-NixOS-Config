@@ -37,6 +37,11 @@
     helvum
     comma
     git-lfs
+    lf
+    ani-cli
+    pulsemixer
+    prismlauncher
+    udiskie
   ];
 
   base.stylix.enable = true;
@@ -45,6 +50,20 @@
   base.hyprland.extraConfig = ''
     monitor=, highres, 0x0, 1
   '';
+  base.hyprland.config.anims = ''
+    enabled = true
+
+    # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
+
+    bezier = myBezier, 0.05, 0.9, 0.1, 1.05
+
+    animation = windows, 1, 7, myBezier
+    animation = windowsOut, 1, 7, default, popin 80%
+    animation = border, 1, 10, default
+    animation = borderangle, 1, 8, loop
+    animation = fade, 1, 7, default
+    animation = workspaces, 1, 6, default
+  '';
   base.hyprland.config.binds = ''
           # See https://wiki.hyprland.org/Configuring/Keywords/ for more
           $mainMod = ALT
@@ -52,17 +71,26 @@
           # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
           bind = $mainMod, RETURN, exec, kitty
           bind = $mainMod, C, killactive,
+          bind = $mainMod, E, exec, kitty lf
           bind = $mainMod, M, exit,
-          bind = $mainMod, SPACE, togglefloating,
+          bind = $mainMod, v, togglefloating,
           bind = $mainMod, TAB, exec, wofi --show drun
           bind = $mainMod, F, fullscreen, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle
+          bind = SUPER, ESCAPE, exec, kitty sudo nixos-rebuild switch
+          bind = $mainMod, K, exec, python ~/Documents/Scripts/kyle-count/main.py; kitty cat ~/Documents/Scripts/kyle-count/count.txt
 
           # Move focus with mainMod + arrow keys
           bind = $mainMod, left, movefocus, l
           bind = $mainMod, right, movefocus, r
           bind = $mainMod, up, movefocus, u
           bind = $mainMod, down, movefocus, d
+
+          # Audio and brightness
+          bind = SUPER, right, exec, pulsemixer --change-volume +5
+          bind = SUPER, left, exec, pulsemixer --change-volume -5
+          bind = SUPER, up, exec, light -A 5
+          bind = SUPER, down, exec, light -U 5
 
           # Switch workspaces with mainMod + [0-9]
           bind = $mainMod, 1, workspace, 1
