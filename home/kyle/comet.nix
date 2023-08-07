@@ -12,18 +12,7 @@
     quintom-cursor-theme
     authenticator
     clipman
-    libsForQt5.kcmutils
-    libsForQt5.kirigami-addons
-    libsForQt5.kpeoplevcard
-    libfakekey
-    libsForQt5.modemmanager-qt
-    libsForQt5.pulseaudio-qt
-    libsForQt5.qca-qt5
-    libsForQt5.qqc2-desktop-style
-    libsForQt5.qt5.qttools
-    libsForQt5.kdeconnect-kde
     gimp
-    pcmanfm
     firefox
     discord
     github-desktop
@@ -40,10 +29,13 @@
     mate.engrampa
   ];
 
+  base.pcmanfm.enable = true;
+  base.kdeconnect.enable = true;
+
   base.stylix.enable = true;
 
-  base.hyprland.enable = true;
 
+  base.hyprland.enable = true;
   base.hyprland.extraConfig = ''
     monitor=DP-1, highrr, 1920x0, 1
     monitor=HDMI-A-1, 1920x1080@60, 0x0, 1
