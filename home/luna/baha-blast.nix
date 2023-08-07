@@ -41,6 +41,7 @@
   base.hyprland.enable = true;
   base.hyprland.extraConfig = ''
     monitor=, highres, 0x0, 1
+    exec-once = sudo swapon /var/lib/swapfile # This is an solution. no good not libfakekey
   '';
   base.hyprland.config.anims = ''
     enabled = true

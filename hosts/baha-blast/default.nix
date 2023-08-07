@@ -3,7 +3,7 @@
     ../../roles/desktop.nix
 
     ./hardware.nix
-#    ./nvidia.nix
+    ./nvidia.nix
     ./storage.nix
   ];
 
