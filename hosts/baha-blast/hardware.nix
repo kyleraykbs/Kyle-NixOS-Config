@@ -14,6 +14,9 @@
     "vfio_pci"
   ];
   boot.kernelModules = [ "kvm-intel" ];
+  boot.blacklistedKernelModules = [
+    nouveau
+  ];
   boot.extraModulePackages = [ ];
   boot.kernelParams = [ 
     "intel_iommu=on" 
