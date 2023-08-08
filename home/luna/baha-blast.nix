@@ -14,7 +14,6 @@
     clipman
     gimp
     firefox
-    discord
     github-desktop
     keepassxc
     qt5ct
@@ -35,6 +34,7 @@
 
   base.pcmanfm.enable = true;
   base.kdeconnect.enable = true;
+  base.discord.enable = true;
 
   base.stylix.enable = true;
 

@@ -77,9 +77,11 @@
     zip
     unzip
     jdk17
+    ddcutil
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelModules = [ "i2c-dev" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
