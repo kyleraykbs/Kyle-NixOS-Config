@@ -59,9 +59,17 @@ in
         enableRightBackColors = true;
       };
     };
+    
+    home.packages = with pkgs; [
+      qt5ct
+    ];
 
     home.file = {
       ".config/qt5ct/colors/oomox-current.conf".source = config.lib.stylix.colors {
+            template = builtins.readFile ./mustache/qt-oomox.conf.mustache;
+            extension = ".conf";
+          };
+      ".config/qt6ct/colors/oomox-current-6.conf".source = config.lib.stylix.colors {
             template = builtins.readFile ./mustache/qt-oomox.conf.mustache;
             extension = ".conf";
           };
