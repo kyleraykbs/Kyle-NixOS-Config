@@ -46,7 +46,7 @@ in
           color: #000000;  
         }
       '';
-      targets.vscode.enable = true;
+      targets.vscode.enable = false;
       targets.kitty.enable = true;
       targets.kde.enable = true;
       opacity.terminal = 0.75;
@@ -73,6 +73,17 @@ in
             template = builtins.readFile ./mustache/qt.conf.mustache;
             extension = ""; 
           };
+
+      ".cache/wal/colors.json".source = config.lib.stylix.colors {
+            template = builtins.readFile ./mustache/colors.json.mustache;
+            extension = ""; 
+          };
+      
+      ".config/Vencord/settings/quickCss.css".source = config.lib.stylix.colors {
+            template = builtins.readFile ./mustache/quickCss.css.mustache;
+            extension = ""; 
+          };
+
       ".config/qt5ct/qt5ct.conf".text = pkgs.lib.mkBefore (builtins.readFile ./mustache/qt5ct.conf.mustache);
     };
   };
