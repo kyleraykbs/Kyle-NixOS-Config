@@ -16,8 +16,6 @@
     firefox
     github-desktop
     keepassxc
-    qt5ct
-    qt6ct
     libsForQt5.qtstyleplugins
     libsForQt5.kdenlive
     swaybg
