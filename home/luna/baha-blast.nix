@@ -31,6 +31,17 @@
   ];
 
   base.pcmanfm.enable = true;
+  base.neovim = {
+    enable = true;
+    plugins = {
+      nerdtree = {
+        enable = true;
+      };
+      vim-startify = {
+        enable = true;
+      };
+    };
+  };
   base.kdeconnect.enable = true;
   base.discord.enable = true;
 
@@ -127,11 +138,6 @@
 
     vscode = {
       enable = true;
-    };
-
-    neovim = {
-      enable = true;
-      
     };
 
     waybar = {

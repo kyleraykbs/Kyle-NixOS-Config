@@ -6,5 +6,6 @@
     ./pcmanfm.nix
     ./discord.nix
     ./base.nix
+    ./neovim.nix
   ];
 }
