@@ -20,24 +20,39 @@ in
       default = "";
     };
 
-    style = {
-      border_size = mkOption {
-        type = types.int;
-        default = 3; 
-      };
 
-      border_color_1 = mkOption {
-        type = types.str;
-        default = config.lib.stylix.colors.base0A-hex or "ffffff";
-      };
-
-      border_color_2 = mkOption {
-        type = types.str;
-        default = config.lib.stylix.colors.base08-hex or "ffffff";
-      };
-    };
 
     config = {
+      general = {
+        border_size = mkOption {
+          type = types.int;
+          default = 3; 
+        };
+
+        border_color_1 = mkOption {
+          type = types.str;
+          default = config.lib.stylix.colors.base0A-hex or "ffffff";
+        };
+
+        border_color_2 = mkOption {
+          type = types.str;
+          default = config.lib.stylix.colors.base08-hex or "ffffff";
+        };
+
+        gaps_in = mkOption {
+          type = types.int;
+          default = 5;
+        };
+        gaps_out = mkOption {
+          type = types.int;
+          default = 20;
+        };
+        layout = mkOption {
+          type = types.str;
+          default = "dwindle";
+        };
+      };
+
       anims = mkOption {
         type = types.str;
         default = ''
@@ -54,6 +69,21 @@ in
           animation = fade, 1, 7, default
           animation = workspaces, 1, 6, default
         '';
+      };
+
+      dwindle = {
+        pseudotile = mkOption {
+          type = types.bool;
+          default = true;
+        };
+        preserve_split = mkOption {
+          type = types.bool;
+          default = true;
+        };
+        no_gaps_when_only = mkOption {
+          type = types.bool;
+          default = false;
+        };
       };
 
       screenshot = {
@@ -85,7 +115,6 @@ in
         default = ''
           # See https://wiki.hyprland.org/Configuring/Keywords/ for more
           $mainMod = ALT
-
           bind = $mainMod, RETURN, exec, kitty
           bind = $mainMod, C, killactive,
           bind = $mainMod, M, exit,
@@ -212,13 +241,13 @@ in
       general {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-          gaps_in = 5
-          gaps_out = 20
-          border_size = ${builtins.toString cfg.style.border_size}
-          col.active_border = rgba(${cfg.style.border_color_1}ee) rgba(${cfg.style.border_color_2}ee) 45deg
+          gaps_in = ${builtins.toString cfg.config.general.gaps_in}
+          gaps_out = ${builtins.toString cfg.config.general.gaps_out}
+          border_size = ${builtins.toString cfg.config.general.border_size}
+          col.active_border = rgba(${cfg.config.general.border_color_1}ee) rgba(${cfg.config.general.border_color_2}ee) 45deg
           col.inactive_border = rgba(595959aa)
 
-          layout = dwindle
+          layout = ${cfg.config.general.layout}
       }
 
       decoration {
@@ -244,8 +273,9 @@ in
 
       dwindle {
           # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-          pseudotile = true # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-          preserve_split = true # you probably want this
+          pseudotile = ${builtins.toString cfg.config.dwindle.pseudotile}
+          preserve_split = ${builtins.toString cfg.config.dwindle.preserve_split}
+          no_gaps_when_only = ${builtins.toString cfg.config.dwindle.no_gaps_when_only}
       }
 
       master {

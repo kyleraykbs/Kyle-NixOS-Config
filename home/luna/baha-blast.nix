@@ -43,6 +43,10 @@
     monitor=, highres, 0x0, 1
     exec-once = sudo swapon /var/lib/swapfile # This is an solution. no good not libfakekey
   '';
+  base.hyprland.config.dwindle = {
+    no_gaps_when_only = true;
+  };
+
   base.hyprland.config.anims = ''
     enabled = true
 
@@ -53,7 +57,7 @@
     animation = windows, 1, 7, myBezier
     animation = windowsOut, 1, 7, default, popin 80%
     animation = border, 1, 10, default
-    animation = borderangle, 1, 8, loop
+    animation = borderangle, 1, 8, myBezier, loop
     animation = fade, 1, 7, default
     animation = workspaces, 1, 6, default
   '';
@@ -125,6 +129,11 @@
 
     vscode = {
       enable = true;
+    };
+
+    neovim = {
+      enable = true;
+      
     };
 
     waybar = {
