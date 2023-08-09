@@ -174,8 +174,8 @@ in
       polkit_gnome
       wlr-randr
       grim
-      (if cfg.config.screenshare.enable then jellyfin-ffmpeg else null)
-      (if cfg.config.screenshare.enable then killall else null)
+      (mkIf cfg.config.screenshare.enable jellyfin-ffmpeg)
+      (mkIf cfg.config.screenshare.enable killall)
     ];
 
     programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [
