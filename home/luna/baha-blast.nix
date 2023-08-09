@@ -130,6 +130,18 @@
           bindm = $mainMod, mouse:272, movewindow
           bindm = $mainMod, mouse:273, resizewindow
   '';
+  
+  services = {
+    dunst = {
+      enable = true;
+      settings = {
+        global = {
+          origin = "top-left";
+        };
+      };
+    };
+  };
+
 
   programs = {
     firefox = {

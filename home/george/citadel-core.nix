@@ -46,6 +46,17 @@
     workspace = 9, monitor:DP-2, default:false
   '';
 
+  services = {
+    dunst = {
+      enable = true;
+      settings = {
+        global = {
+          origin = "top-left";
+        };
+      };
+    };
+  };
+
   programs = {
     firefox = {
       enable = true;

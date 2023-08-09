@@ -41,13 +41,20 @@ in
           type = types.int;
           default = 5;
         };
+
         gaps_out = mkOption {
           type = types.int;
           default = 20;
         };
+
         layout = mkOption {
           type = types.str;
           default = "dwindle";
+        };
+
+        rounding = mkOption {
+          type = types.int;
+          default = 4;
         };
       };
 
@@ -176,6 +183,10 @@ in
       (mkIf cfg.config.screenshare.enable killall)
     ];
 
+    # set some nice defaults for apps that pair well
+    services.dunst.settings.global.frame_width = lib.mkDefault (builtins.floor (cfg.config.general.border_size / 1.5));
+    services.dunst.settings.global.corner_radius = lib.mkDefault (builtins.floor (cfg.config.general.rounding * 1.5));
+    
     programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [
       wlrobs
     ];
@@ -251,7 +262,7 @@ in
       decoration {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-          rounding = 4
+          rounding = ${builtins.toString cfg.config.general.rounding}
           blur = true
           blur_size = 5
           blur_passes = 3

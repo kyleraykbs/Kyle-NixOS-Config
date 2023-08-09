@@ -23,6 +23,7 @@
     helvum
     comma
     git-lfs
+    obsidian
   ];
 
   base.pcmanfm.enable = true;
@@ -30,7 +31,6 @@
   base.discord.enable = true;
 
   base.stylix.enable = true;
-
 
   base.hyprland.enable = true;
   base.hyprland.extraConfig = ''
@@ -52,6 +52,18 @@
     workspace = 8, monitor:HDMI-A-1, default:false
     workspace = 9, monitor:HDMI-A-1, default:false
   '';
+
+  services = {
+    dunst = {
+      enable = true;
+      settings = {
+        global = {
+          monitor = 1;
+          origin = "top-left";
+        };
+      };
+    };
+  };
 
   programs = {
     firefox = {
