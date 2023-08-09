@@ -20,8 +20,6 @@ in
       default = "";
     };
 
-
-
     config = {
       general = {
         border_size = mkOption {
@@ -273,9 +271,9 @@ in
 
       dwindle {
           # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-          pseudotile = ${builtins.toString cfg.config.dwindle.pseudotile}
-          preserve_split = ${builtins.toString cfg.config.dwindle.preserve_split}
-          no_gaps_when_only = ${builtins.toString cfg.config.dwindle.no_gaps_when_only}
+          pseudotile = ${(if cfg.config.dwindle.pseudotile then "true" else "false")}
+          preserve_split = ${(if cfg.config.dwindle.preserve_split then "true" else "false")}
+          no_gaps_when_only = ${(if cfg.config.dwindle.no_gaps_when_only then "true" else "false")}
       }
 
       master {

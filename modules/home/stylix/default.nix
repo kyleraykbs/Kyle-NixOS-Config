@@ -62,6 +62,7 @@ in
     
     home.packages = with pkgs; [
       qt5ct
+      qt6ct
     ];
 
     home.file = {
@@ -70,7 +71,7 @@ in
             extension = ".conf";
           };
       ".config/qt6ct/colors/oomox-current-6.conf".source = config.lib.stylix.colors {
-            template = builtins.readFile ./mustache/qt-oomox.conf.mustache;
+            template = builtins.readFile ./mustache/qt-oomox-6.conf.mustache;
             extension = ".conf";
           };
       ".config/Trolltech.conf".source = config.lib.stylix.colors {
@@ -93,6 +94,7 @@ in
           };
 
       ".config/qt5ct/qt5ct.conf".text = pkgs.lib.mkBefore (builtins.readFile ./mustache/qt5ct.conf.mustache);
+      ".config/qt6ct/qt6ct.conf".text = pkgs.lib.mkBefore (builtins.readFile ./mustache/qt6ct.conf.mustache);
     };
   };
 }
