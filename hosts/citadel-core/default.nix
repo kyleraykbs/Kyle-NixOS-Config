@@ -3,11 +3,12 @@
     ../../roles/desktop.nix
 
     ./hardware.nix
-    ./nvidia.nix
     ./storage.nix
   ];
 
   networking.hostName = "citadel-core";
+
+  base.nvidia.enable = true;
   
   base.user.george.enable = true;
   base.hidpi.enable = true;

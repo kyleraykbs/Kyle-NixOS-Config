@@ -3,9 +3,11 @@
     ../../roles/desktop.nix
 
     ./hardware.nix
-    ./nvidia.nix
     ./storage.nix
   ];
+
+  base.virtualisation.enable = true;
+  base.nvidia.enable = true;
 
   networking.hostName = "comet";
   
@@ -22,5 +24,4 @@
     };
   };
 
-  base.virtualisation.enable = true;
 }

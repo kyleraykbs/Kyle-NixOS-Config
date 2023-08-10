@@ -7,5 +7,6 @@
     ./discord.nix
     ./base.nix
     ./neovim.nix
+    ./fish.nix
   ];
 }

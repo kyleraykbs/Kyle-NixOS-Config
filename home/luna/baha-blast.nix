@@ -30,7 +30,6 @@
     udiskie
   ];
 
-  base.pcmanfm.enable = true;
   base.neovim = {
     enable = true;
     plugins = {
@@ -42,8 +41,11 @@
       };
     };
   };
+
+  base.pcmanfm.enable = true;
   base.kdeconnect.enable = true;
   base.discord.enable = true;
+  base.fish.enable = true;
 
   base.stylix.enable = true;
 
