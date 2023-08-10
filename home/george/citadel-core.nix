@@ -46,7 +46,7 @@
     workspace = 8, monitor:DP-2, default:false
     workspace = 9, monitor:DP-2, default:false
 
-    bind = $mainMod, ESCAPE, exec, kitty sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"
+    bind = $mainMod, ESCAPE, exec, kitty sh -c "cd /etc/nixos; git pull; sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"
   '';
 
   services = {
