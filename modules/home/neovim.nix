@@ -122,15 +122,21 @@ in
           };
         };
       };
-      vim-startify = {
+      startify = {
         enable = mkOption {
           type = types.bool;
           default = false;
         };
         config = {
-          header = mkOption {
-            type = types.str;
-            default = "";
+          header =  {
+            enable = mkOption {
+              type = types.bool;
+              default = false;
+            };
+            text = mkOption {
+              type = types.str;
+              default = "";
+            };
           };
         };
       };
@@ -162,6 +168,12 @@ in
         enable = mkOption {
           type = types.bool;
           default = false;
+        };
+        config = {
+          char = mkOption {
+            type = types.str;
+            default = "¦";
+          };
         };
       };
       whichKey = {
@@ -229,12 +241,40 @@ in
           type = types.bool;
           default = false;
         };
+        config = {
+          autoSession = mkOption {
+            type = types.bool;
+            default = false;
+          };
+          sessionName = mkOption {
+            type = types.str;
+            default = "Session.vim";
+          };
+          sessionDir = {
+            enable = mkOption {
+              type = types.bool;
+              default = false;
+            };
+            path = mkOption {
+              type = types.str;
+              default = "";
+            };
+          };
+          autoSave = mkOption {
+            type = types.bool;
+            default = false;
+          };
+        };
       };
       autoSave = {
         enable = mkOption {
           type = types.bool;
           default = false;
         };
+        onStart = mkOption {
+          type = types.bool;
+          default = false;
+          };
       };
     };
   };
@@ -242,17 +282,25 @@ in
   config = mkIf cfg.enable {
     programs.neovim = {
       enable = true;
+      # add this line to config once syntax is right: ${(if cfg.plugins.workSpace.config.sessionDir.enable then "let g:workspace_session_directory = " cfg.plugins.workSpace.config.sessionDir.path else null)}
+      # add this line to config once syntax is right: ${(if cfg.plugins.startify.config.header.enable then "let g:workspace_session_directory = " cfg.plugins.startify.config.header.text else null)}
       extraConfig = ''
+        " binds
         let mapleader = "${cfg.binds.leader}"
-        ${cfg.binds.other}
+        nnoremap ${cfg.plugins.whichKey.binds.leader} :WhichKey <Space><CR><space>
         nnoremap ${cfg.plugins.nerdtree.binds.toggle} :NERDTreeToggle<cr>
+        ${cfg.binds.other}
+        " options
         let g:NERDCreateDefaultMappings = ${(if cfg.plugins.nerdcommenter.binds.defaultBinds then "1" else "0")}
         let g:NERDSpaceDelims = ${(if cfg.plugins.nerdcommenter.config.whiteSpace then "1" else "0")}
-        nnoremap ${cfg.plugins.whichKey.binds.leader} :WhichKey <Space><CR><space>
+        let g:workspace_session_name = ${(if cfg.plugins.workSpace.config.autoSession then "1" else "0")}
+        let g:workspace_autosave = ${(if cfg.plugins.workSpace.config.autoSave then "1" else "0")}
+        let g:auto_save = ${(if cfg.plugins.autoSave.onStart then "1" else "0")}
+        let g:indentline_char = ${cfg.plugins.indentLine.config.char}
         ${cfg.extraConfig}
       '';
       plugins = with pkgs.vimPlugins; [
-        (mkIf cfg.plugins.vim-startify.enable vim-startify)
+        (mkIf cfg.plugins.startify.enable vim-startify)
         (mkIf cfg.plugins.nerdtree.enable nerdtree)        
         (mkIf cfg.plugins.nerdcommenter.enable nerdcommenter)
         (mkIf cfg.plugins.ale.enable ale)
