@@ -35,10 +35,10 @@
 
     kernelParams = [ 
       "intel_iommu=on" 
-      "iommu=pt"
-      "pcie_acs_override=downstream,multifunction" 
-      "kvm.ignore_msrs=1" 
-     "vfio-pci.ids=10de:1e81,10de:10f8,10de:1ad8,10de:1ad9"
+      # "iommu=pt"
+      # "pcie_acs_override=downstream,multifunction" 
+      # "kvm.ignore_msrs=1" 
+      "vfio-pci.ids=10de:1e81,10de:10f8,10de:1ad8,10de:1ad9"
     ];
     kernelModules = [
       "kvm-intel"

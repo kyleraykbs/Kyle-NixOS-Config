@@ -14,6 +14,10 @@
   base.hidpi.enable = true;
   base.hyprland.enable = true;
 
+  services.xserver.displayManager.autoLogin.user = "george";
+  services.xserver.displayManager.autoLogin.enable = true;
+
+
   services = {
     syncthing = {
         enable = true;
