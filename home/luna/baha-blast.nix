@@ -30,8 +30,6 @@
     udiskie
   ];
 
-  base.pcmanfm.enable = true;
-
   base.neovim = {
     enable = true;
     plugins = {
@@ -85,8 +83,11 @@
       };
     };
   };
+
+  base.pcmanfm.enable = true;
   base.kdeconnect.enable = true;
   base.discord.enable = true;
+  base.fish.enable = true;
 
   base.stylix.enable = true;
 
@@ -173,6 +174,18 @@
           bindm = $mainMod, mouse:272, movewindow
           bindm = $mainMod, mouse:273, resizewindow
   '';
+  
+  services = {
+    dunst = {
+      enable = true;
+      settings = {
+        global = {
+          origin = "top-left";
+        };
+      };
+    };
+  };
+
 
   programs = {
     firefox = {

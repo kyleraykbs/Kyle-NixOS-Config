@@ -20,8 +20,6 @@ in
       default = "";
     };
 
-
-
     config = {
       general = {
         border_size = mkOption {
@@ -43,13 +41,20 @@ in
           type = types.int;
           default = 5;
         };
+
         gaps_out = mkOption {
           type = types.int;
           default = 20;
         };
+
         layout = mkOption {
           type = types.str;
           default = "dwindle";
+        };
+
+        rounding = mkOption {
+          type = types.int;
+          default = 4;
         };
       };
 
@@ -178,6 +183,10 @@ in
       (mkIf cfg.config.screenshare.enable killall)
     ];
 
+    # set some nice defaults for apps that pair well
+    services.dunst.settings.global.frame_width = lib.mkDefault (builtins.floor (cfg.config.general.border_size / 1.5));
+    services.dunst.settings.global.corner_radius = lib.mkDefault (builtins.floor (cfg.config.general.rounding * 1.5));
+    
     programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [
       wlrobs
     ];
@@ -253,7 +262,7 @@ in
       decoration {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-          rounding = 4
+          rounding = ${builtins.toString cfg.config.general.rounding}
           blur = true
           blur_size = 5
           blur_passes = 3
@@ -273,9 +282,9 @@ in
 
       dwindle {
           # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-          pseudotile = ${builtins.toString cfg.config.dwindle.pseudotile}
-          preserve_split = ${builtins.toString cfg.config.dwindle.preserve_split}
-          no_gaps_when_only = ${builtins.toString cfg.config.dwindle.no_gaps_when_only}
+          pseudotile = ${(if cfg.config.dwindle.pseudotile then "true" else "false")}
+          preserve_split = ${(if cfg.config.dwindle.preserve_split then "true" else "false")}
+          no_gaps_when_only = ${(if cfg.config.dwindle.no_gaps_when_only then "true" else "false")}
       }
 
       master {

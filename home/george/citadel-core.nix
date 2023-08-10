@@ -28,6 +28,7 @@
   base.pcmanfm.enable = true;
   base.kdeconnect.enable = true;
   base.discord.enable = true;
+  base.fish.enable = true;
 
   base.stylix.enable = true;
 
@@ -45,6 +46,17 @@
     workspace = 8, monitor:DP-2, default:false
     workspace = 9, monitor:DP-2, default:false
   '';
+
+  services = {
+    dunst = {
+      enable = true;
+      settings = {
+        global = {
+          origin = "top-left";
+        };
+      };
+    };
+  };
 
   programs = {
     firefox = {
