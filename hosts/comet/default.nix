@@ -15,8 +15,8 @@
 
   base.hyprland.enable = true;
 
-  services.xserver.displayManager.autoLogin.user = "kyle";
-  services.xserver.displayManager.autoLogin.enable = true;
+  # services.xserver.displayManager.autoLogin.user = "kyle";
+  # services.xserver.displayManager.autoLogin.enable = true;
 
   services = {
     syncthing = {

@@ -78,6 +78,8 @@
     unzip
     jdk17
     ddcutil
+    v4l-utils
+    wf-recorder
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
