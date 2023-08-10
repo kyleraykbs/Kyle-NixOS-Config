@@ -31,6 +31,7 @@
   ];
 
   base.pcmanfm.enable = true;
+
   base.neovim = {
     enable = true;
     plugins = {
@@ -38,6 +39,48 @@
         enable = true;
       };
       vim-startify = {
+        enable = true;
+      };
+      nerdcommenter = {
+        enable = true;
+        binds = {
+          defaultBinds = true;
+        };
+      };
+      ale = {
+        enable = true;
+      };
+      indentLine = {
+        enable = true;
+      };
+      whichKey = {
+        enable = true;
+      };
+      autoPairs = {
+        enable = true;
+      };
+      whiteSpace = {
+        enable = true;
+      };
+      airLine = {
+        enable = true;
+      };
+      easyMotion = {
+        enable = true;
+      };
+      fugitive = {
+        enable = true;
+      };
+      treeSitter = {
+        enable = true;
+      };
+      devicons = {
+        enable = true;
+      };
+      workSpace = {
+        enable = true;
+      };
+      autoSave = {
         enable = true;
       };
     };
