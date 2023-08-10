@@ -25,6 +25,10 @@
     git-lfs
   ];
 
+  base.hyprland.extraConfig = ''
+    bind = $mainMod, ESCAPE, exec, kitty sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"
+  '';
+
   base.pcmanfm.enable = true;
   base.kdeconnect.enable = true;
   base.discord.enable = true;
