@@ -85,7 +85,7 @@
           bind = $mainMod, TAB, exec, wofi --show drun
           bind = $mainMod, F, fullscreen, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle
-          bind = SUPER, ESCAPE, exec, kitty sudo nixos-rebuild switch
+          bind = $mainMod, ESCAPE, exec, kitty sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"
           bind = $mainMod, K, exec, python ~/Documents/Scripts/kyle-count/main.py; kitty cat ~/Documents/Scripts/kyle-count/count.txt
 
           # Move focus with mainMod + arrow keys

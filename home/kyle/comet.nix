@@ -52,6 +52,8 @@
     workspace = 7, monitor:HDMI-A-1, default:true
     workspace = 8, monitor:HDMI-A-1, default:false
     workspace = 9, monitor:HDMI-A-1, default:false
+
+    bind = $mainMod, ESCAPE, exec, kitty sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"
   '';
 
   services = {
