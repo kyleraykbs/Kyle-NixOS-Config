@@ -84,7 +84,12 @@ in
           };
 
       ".cache/wal/colors.json".source = config.lib.stylix.colors {
-            template = builtins.readFile ./mustache/colors.json.mustache;
+            template = builtins.readFile ./mustache/colors.json-pywal.mustache;
+            extension = ""; 
+          };
+
+      ".cache/wal/colors".source = config.lib.stylix.colors {
+            template = builtins.readFile ./mustache/colors-pywal.mustache;
             extension = ""; 
           };
       
