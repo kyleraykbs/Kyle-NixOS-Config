@@ -34,7 +34,7 @@
 
   base.hyprland.enable = true;
   base.hyprland.extraConfig = ''
-    monitor=DP-2, 3840x2160@60, 0x0, 2
+    monitor=HDMI-A-1, 3840x2160@60, 0x0, 2
 
     workspace = 1, monitor:DP-2, default:true
     workspace = 2, monitor:DP-2, default:false
