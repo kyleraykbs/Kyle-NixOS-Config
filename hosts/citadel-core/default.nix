@@ -11,6 +11,12 @@
   base.nvidia.enable = true;
   
   base.user.george.enable = true;
+  base.greetd = {
+    enable = true;
+    user = "george";
+    desktopenv = "hyprland";
+  };
+
   base.hidpi.enable = true;
   base.hyprland.enable = true;
 
