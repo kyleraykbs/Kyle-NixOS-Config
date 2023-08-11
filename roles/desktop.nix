@@ -1,4 +1,4 @@
-{pkgs, config, inputs, ...}: {
+{pkgs, config, inputs, lib, ...}: {
   imports = [inputs.stylix.nixosModules.stylix];
 
   programs = {
@@ -59,7 +59,7 @@
 
   services.xserver.enable = true;
   services.xserver.libinput.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.enable = lib.mkDefault true;
 
   hardware.opengl = {
     enable = true;

@@ -12,6 +12,11 @@
   networking.hostName = "comet";
   
   base.user.kyle.enable = true;
+  base.greetd = {
+    enable = true;
+    user = "kyle";
+    desktopenv = "hyprland";
+  };
 
   base.hyprland.enable = true;
 
