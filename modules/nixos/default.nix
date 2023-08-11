@@ -10,5 +10,6 @@
     ./virtual-machines.nix
     ./hidpi.nix
     ./nvidia.nix
+    ./greetd.nix
   ];
 }

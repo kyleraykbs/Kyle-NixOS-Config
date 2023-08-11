@@ -45,12 +45,16 @@ in
       WLR_NO_HARDWARE_CURSORS="1";
       GBM_BACKEND = "nvidia-drm";
       WLR_DRM_NO_ATOMIC = "1";
+      __GLX_VENDOR_LIBRARY_NAME="nvidia";
       # XDG_SESSION_TYPE = "wayland";
-      # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       # WLR_BACKEND = "vulkan";
       # WLR_RENDERER = "vulkan";
       NIXOS_OZONE_WL = "1";
     };
+
+    environment.systemPackages = with pkgs; [
+      nvidia-vaapi-driver
+    ];
 
     hardware.nvidia = {
       # Modesetting is needed for most wayland compositors

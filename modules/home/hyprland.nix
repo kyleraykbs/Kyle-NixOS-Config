@@ -331,7 +331,7 @@ in
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
       ${cfg.config.binds}
 
-      ${(if cfg.config.screenshare.enable then ''bind = ${cfg.config.screenshare.keybind},exec,killall -9 wf-recorder; killall -9 ffplay; hyprctl keyword debug:damage_tracking 0; wf-recorder -f pipe:99 -m matroska -g "1920,0 1920x1080" -r 30 -b:v 2M -c libx264 99>&1 >&2 | ffplay -probesize 32 -sync ext -fflags nobuffer -vcodec h264 -'' else "")}
+      ${(if cfg.config.screenshare.enable then ''bind = ${cfg.config.screenshare.keybind},exec,killall -9 wf-recorder; killall -9 ffplay; hyprctl keyword debug:damage_tracking 0; wf-recorder -f pipe:99 -m matroska -g "$(slurp -o)" -r 30 -b:v 2M -c libx264 99>&1 >&2 | ffplay -probesize 32 -sync ext -fflags nobuffer -vcodec h264 -'' else "")}
       ${(if cfg.config.screenshare.enable then ''bind = ${cfg.config.screenshare.stopkeybind},exec,killall -9 wf-recorder; killall -9 ffplay; hyprctl keyword debug:damage_tracking ${builtins.toString (if cfg.config.debug.damage_tracking then 2 else 1)}'' else "")}
       ${(if cfg.config.screenshare.enable then ''bind = ${cfg.config.screenshare.obskeybind},exec,killall -9 ffplay; ffplay /dev/$(ls /dev/ | grep "video" | tail -1)'' else "")}
       bind = ${cfg.config.screenshot.keybind},exec,slurp | grim -g - ${cfg.config.screenshot.output_path}/$(date +'screenshot_%Y-%m-%d-%H%M%S.png'); wl-copy < ${cfg.config.screenshot.output_path}/$(ls ${cfg.config.screenshot.output_path}/ -tp | head -1)
