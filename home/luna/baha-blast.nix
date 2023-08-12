@@ -203,10 +203,6 @@
       enable = true;
     };
 
-    waybar = {
-      enable = true;
-    };
-
     kitty = {
       enable = true;
       settings = {

@@ -8,5 +8,6 @@
     ./base.nix
     ./neovim.nix
     ./fish.nix
+    ./waybar.nix
   ];
 }

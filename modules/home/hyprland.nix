@@ -366,6 +366,7 @@ in
       windowrule=opacity 0.925,^(Bless)$
       #############
 
+      ${if config.base.waybar.enable then "exec-once=${pkgs.waybar}/bin/waybar" else ""}
       exec = swaybg -i "${config.base.wallpaper}"
       exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       exec-once = ${pkgs.libsForQt5.kdeconnect-kde}/libexec/kdeconnectd

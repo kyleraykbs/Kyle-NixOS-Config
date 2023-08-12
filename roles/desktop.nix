@@ -12,8 +12,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  fonts.fonts = with pkgs; [
-    nerdfonts
+  fonts.packages = with pkgs; [
+    font-awesome
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -80,6 +80,7 @@
     ddcutil
     v4l-utils
     wf-recorder
+    i2c-tools
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
