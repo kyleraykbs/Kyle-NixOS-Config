@@ -110,19 +110,26 @@
     }
 
     #workspaces button:hover {
-        background: rgba(0, 0, 0, 0.2);
+        background: #64FF7D;
     }
 
     #workspaces button.focused {
-        background-color: #64727D;
-        box-shadow: inset 0 -3px #ffffff;
+        background: #64FF7D;
+    }
+
+    .modules-left #workspaces button.active {
+        background: #64FF7D;
+    }
+    .modules-left #workspaces button.urgent {
+        background-color: #007000;
     }
 
     #workspaces button.urgent {
-        background-color: #eb4d4b;
+        background: #64FF7D;
     }
 
     #mode {
+        background: #64FF7D;
         background-color: #64727D;
         border-bottom: 3px solid #ffffff;
     }

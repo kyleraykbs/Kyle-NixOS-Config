@@ -18,7 +18,6 @@
     desktopenv = "hyprland";
   };
 
-  base.stylix.enable = true;
   base.hyprland.enable = true;
 
   # services.xserver.displayManager.autoLogin.user = "kyle";

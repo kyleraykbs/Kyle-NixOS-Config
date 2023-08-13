@@ -13,6 +13,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    stylix.autoEnable = true;
+    stylix.autoEnable = false;
   };
 }

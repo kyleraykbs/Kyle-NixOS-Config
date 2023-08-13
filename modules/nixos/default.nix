@@ -11,6 +11,5 @@
     ./hidpi.nix
     ./nvidia.nix
     ./greetd.nix
-    ./stylix.nix
   ];
 }

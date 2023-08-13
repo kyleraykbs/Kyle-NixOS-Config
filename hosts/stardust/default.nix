@@ -10,7 +10,6 @@
   
   base.user.kyle.enable = true;
 
-  base.stylix.enable = true;
   base.hyprland.enable = true;
   # base.virtualisation.enable = true;
 }
