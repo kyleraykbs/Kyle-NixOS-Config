@@ -48,6 +48,11 @@
       showSeconds = true;
     };
   };
+  programs.waybar.style = ''
+    .modules-left #workspaces button.urgent {
+      background-color: #00FF00;
+    }
+  '';
 
   base.hyprland.config.dwindle = {
     no_gaps_when_only = true;
