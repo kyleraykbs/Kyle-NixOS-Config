@@ -86,6 +86,25 @@
     bindm = $mainMod, mouse:272, movewindow
     bindm = , code:133, resizewindow
   '';
+
+  base.waybar = {
+    enable = true;
+
+    middleModules = [ "clock" ];
+    rightModules = [
+      "network"
+      "memory"
+      "temperature"
+      "cpu"
+      "pulseaudio"
+      "tray"
+    ];
+
+    clock = {
+      use24HourTime = false;
+      showSeconds = true;
+    };
+  };
   
   programs = {
     firefox = {
