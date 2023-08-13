@@ -49,8 +49,9 @@
     };
   };
   programs.waybar.style = ''
+    @define-color base08 #00ff00;
     .modules-left #workspaces button.urgent {
-      background-color: #00FF00;
+      background-color: @base08;
     }
   '';
 
