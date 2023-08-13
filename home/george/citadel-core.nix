@@ -32,6 +32,7 @@
 
   base.stylix.enable = true;
 
+  base.waybar.enable = true;
   base.hyprland.enable = true;
   base.hyprland.extraConfig = ''
     monitor=HDMI-A-1, 3840x2160@60, 0x0, 2
@@ -118,10 +119,6 @@
     };
 
     vscode = {
-      enable = true;
-    };
-
-    waybar = {
       enable = true;
     };
 
