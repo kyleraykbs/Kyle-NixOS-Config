@@ -48,6 +48,10 @@
       showSeconds = true;
     };
   };
+
+  base.hyprland.config.dwindle = {
+    no_gaps_when_only = true;
+  };
   base.hyprland.enable = true;
   base.hyprland.extraConfig = ''
     monitor=HDMI-A-1, 3840x2160@60, 0x0, 2
