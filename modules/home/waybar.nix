@@ -378,7 +378,7 @@ in
           on-scroll-up = "hyprctl dispatch workspace e+1";
           on-scroll-down = "hyprctl dispatch workspace e-1";
           on-click = "activate";
-          sort-by-name = false;
+          sort-by-number = true;
         };
         modules-left = cfg.leftModules;
         modules-center = cfg.middleModules;
