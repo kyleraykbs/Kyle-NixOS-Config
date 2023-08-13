@@ -370,6 +370,7 @@ in
       exec = swaybg -i "${config.base.wallpaper}"
       exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       exec-once = ${pkgs.libsForQt5.kdeconnect-kde}/libexec/kdeconnectd
+      exec-once = hyprctl dispatch workspace 1
       ${cfg.extraConfig}
     '';
   };
