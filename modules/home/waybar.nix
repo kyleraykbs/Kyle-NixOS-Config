@@ -54,6 +54,17 @@ in
         "tray"
       ];
     };
+
+    clock = {
+      use24HourTime = mkOption {
+        type = types.bool;
+        default = false;
+      };
+      showSeconds = mkOption {
+        type = types.bool;
+        default = true;
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -94,6 +105,8 @@ in
           };
         };
         clock = {
+          interval = mkIf cfg.clock.showSeconds 1;
+          format = "{:${if cfg.clock.use24HourTime then ":%H" else ":%I"}:%M${if cfg.clock.showSeconds then ":%S" else ""} ${if cfg.clock.use24HourTime then "" else "%p"}}";
           format-alt = "{:%Y-%m-%d}";
           tooltip-format = "{:%Y-%m-%d | %H:%M}";
         };

@@ -30,7 +30,24 @@
   base.discord.enable = true;
   base.fish.enable = true;
 
-  base.waybar.enable = true;
+  base.waybar = {
+    enable = true;
+
+    middleModules = [ "clock" ];
+    rightModules = [
+      "network"
+      "memory"
+      "temperature"
+      "cpu"
+      "pulseaudio"
+      "tray"
+    ];
+
+    clock = {
+      use24HourTime = false;
+      showSeconds = true;
+    };
+  };
   base.hyprland.enable = true;
   base.hyprland.extraConfig = ''
     monitor=HDMI-A-1, 3840x2160@60, 0x0, 2
