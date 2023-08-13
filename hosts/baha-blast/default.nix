@@ -10,6 +10,7 @@
   base.user.luna.enable = true;
   networking.hostName = "baha-blast";
 
+  base.stylix.enable = true;
   base.hyprland.enable = true;
 
   services = {

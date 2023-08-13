@@ -7,6 +7,7 @@
 
   stylix.image = config.base.wallpaper;
   stylix.polarity = "dark";
+  stylix.autoEnable = lib.mkDefault false;
 
   base.flakes.enable = true;
 
