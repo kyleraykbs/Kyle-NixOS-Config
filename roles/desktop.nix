@@ -84,6 +84,7 @@
     i2c-tools
   ];
 
+  boot.supportedFilesystems = [ "ntfs" ];
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.kernelModules = [ "i2c-dev" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
