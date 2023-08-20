@@ -31,7 +31,7 @@
   base.discord.enable = true;
   base.fish.enable = true;
 
-  base.waybar.enable = true;
+  # base.waybar.enable = true;
   base.stylix.enable = true;
 
   base.hyprland.enable = true;
