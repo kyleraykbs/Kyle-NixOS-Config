@@ -57,7 +57,7 @@
   base.hyprland.startupApps = [
     {command="virt-manager"; workspace=5; time=1;}
     {command="discord"; workspace=1; time=1;}
-  ]
+  ];
   base.hyprland.extraConfig = ''
     monitor=HDMI-A-1, 3840x2160@60, 0x0, 2
 
