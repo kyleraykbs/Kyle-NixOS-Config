@@ -77,7 +77,6 @@
     pciutils
     zip
     unzip
-    jdk17
     ddcutil
     v4l-utils
     wf-recorder
