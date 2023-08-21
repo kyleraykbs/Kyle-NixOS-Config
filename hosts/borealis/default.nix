@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   imports = [
     ../../roles/server.nix
 
@@ -9,6 +9,14 @@
   networking.hostName = "borealis";
   
   base.user.kyle.enable = true;
+
+  services.vsftpd = {
+    enable = true;
+    writeEnable = true;
+    localUsers = true;
+    userlist = [ "kyle" ];
+    userlistEnable = true;
+  };
   
   services = {
     openssh = {

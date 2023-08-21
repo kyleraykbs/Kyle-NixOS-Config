@@ -51,6 +51,7 @@
     neofetch
     git
     htop
+    socat
     nix-index
     pciutils
     zip
