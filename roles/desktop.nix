@@ -5,6 +5,8 @@
     fish = { enable = true; };
   };
 
+  services.flatpak.enable = true;
+
   stylix.image = config.base.wallpaper;
   stylix.polarity = "dark";
   stylix.autoEnable = lib.mkDefault false;

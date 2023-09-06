@@ -31,5 +31,4 @@
         configDir = "/home/kyle/.config/syncthing";   # Folder for Syncthing's settings and keys
     };
   };
-
 }

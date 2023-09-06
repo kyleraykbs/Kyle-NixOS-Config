@@ -23,6 +23,7 @@
     helvum
     comma
     git-lfs
+    obsidian
   ];
 
   base.hyprland.extraConfig = ''
@@ -95,6 +96,7 @@
       "network"
       "memory"
       "temperature"
+      "battery"
       "cpu"
       "pulseaudio"
       "tray"

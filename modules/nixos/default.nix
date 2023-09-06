@@ -11,5 +11,6 @@
     ./hidpi.nix
     ./nvidia.nix
     ./greetd.nix
+    ./bluetooth.nix
   ];
 }
