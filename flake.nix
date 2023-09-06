@@ -39,6 +39,8 @@
         "luna@baha-blast" = mkHome ./home/luna/baha-blast.nix;
         "kyle@stardust" = mkHome ./home/kyle/stardust.nix;
         "kyle@borealis" = mkHome ./home/kyle/borealis.nix;
+        "jon@borealis" = mkHome ./home/jon/borealis.nix;
       };
     };
 }
+ 
