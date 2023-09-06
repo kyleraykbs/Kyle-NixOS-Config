@@ -4,6 +4,7 @@
     ./hyprland.nix
     ./home-manager.nix
     ./users/kyle.nix
+    ./users/jon.nix
     ./users/george.nix
     ./users/luna.nix
     ./flakes.nix
