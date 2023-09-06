@@ -30,6 +30,7 @@
         citadel-core = mkNixos "x86_64-linux" ./hosts/citadel-core;
         baha-blast = mkNixos "x86_64-linux" ./hosts/baha-blast;
         stardust = mkNixos "x86_64-linux" ./hosts/stardust;
+        borealis = mkNixos "x86_64-linux" ./hosts/borealis;
       };
 
       homeConfigurations = {
@@ -37,6 +38,7 @@
         "george@citadel-core" = mkHome ./home/george/citadel-core.nix;
         "luna@baha-blast" = mkHome ./home/luna/baha-blast.nix;
         "kyle@stardust" = mkHome ./home/kyle/stardust.nix;
+        "kyle@borealis" = mkHome ./home/kyle/borealis.nix;
       };
     };
 }

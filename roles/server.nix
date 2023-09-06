@@ -1,15 +1,13 @@
 {pkgs, config, inputs, lib, ...}: {
   imports = [inputs.stylix.nixosModules.stylix];
 
-  programs = {
-    fish = { enable = true; };
-  };
-
-  services.flatpak.enable = true;
-
   stylix.image = config.base.wallpaper;
   stylix.polarity = "dark";
   stylix.autoEnable = lib.mkDefault false;
+
+  programs = {
+    fish = { enable = true; };
+  };
 
   base.flakes.enable = true;
 
@@ -49,51 +47,19 @@
     };
   };
 
-  # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  services.xserver.enable = true;
-  services.xserver.libinput.enable = true;
-  services.xserver.displayManager.sddm.enable = lib.mkDefault true;
-
-  hardware.opengl = {
-    enable = true;
-    # driSupport = true;
-    # driSupport32Bit = true;
-  };
-
   environment.systemPackages = with pkgs; [
     neofetch
-    github-desktop
     git
     htop
+    socat
     nix-index
     pciutils
     zip
     unzip
-    ddcutil
-    v4l-utils
-    wf-recorder
-    i2c-tools
   ];
 
   boot.supportedFilesystems = [ "ntfs" ];
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelModules = [ "i2c-dev" ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    v4l2loopback
-  ];
-
-  security.polkit.enable = true;
-  services.gnome.gnome-keyring.enable = true;
 
   networking.firewall.enable = false;
 

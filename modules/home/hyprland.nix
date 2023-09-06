@@ -20,6 +20,15 @@ in
       default = "";
     };
 
+    startupApps = mkOption {
+      type = types.listOf types.attrs;
+      default = [
+        # TEMPLATE OPTIONS
+        # {command="kitty"; workspace=2;}
+        # {command="firefox"; workspace=3; time=3;}
+      ];
+    };
+
     config = {
       general = {
         border_size = mkOption {
@@ -372,6 +381,19 @@ in
       exec-once = ${pkgs.libsForQt5.kdeconnect-kde}/libexec/kdeconnectd
       exec-once = hyprctl dispatch workspace 1
       ${cfg.extraConfig}
+
+      exec-once=${
+        let
+          lines = builtins.concatStringsSep  "; " (map (
+            x: 
+            let
+              timePart = if x ? time then builtins.toString x.time else "1";
+            in
+            (x.command + " & sleep ${timePart}; hyprctl dispatch movetoworkspacesilent " + (builtins.toString x.workspace))
+            ) cfg.startupApps);
+        in
+        lines
+      }
     '';
   };
 }

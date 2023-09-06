@@ -49,12 +49,18 @@
     };
   };
 
+
   base.hyprland.config.dwindle = {
     no_gaps_when_only = true;
   };
   base.hyprland.enable = true;
+  base.hyprland.startupApps = [
+    {command="virt-manager"; workspace=5; time=1;}
+    {command="discord"; workspace=1; time=1;}
+  ];
   base.hyprland.extraConfig = ''
     monitor=HDMI-A-1, 3840x2160@60, 0x0, 2
+    monitor=DP-2, 3840x2160@60, 0x0, 2
 
     workspace = 1, monitor:DP-2, default:true
     workspace = 2, monitor:DP-2, default:false
