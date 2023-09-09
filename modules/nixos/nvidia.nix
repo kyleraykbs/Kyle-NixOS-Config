@@ -38,7 +38,7 @@ in
 
     services.xserver.videoDrivers = ["nvidia"];
 
-    programs.hyprland.nvidiaPatches = true;
+    programs.hyprland.enableNvidiaPatches = true;
 
     environment.sessionVariables = mkIf cfg.waylandFixups {
       LIBVA_DRIVER_NAME = "vdapu";

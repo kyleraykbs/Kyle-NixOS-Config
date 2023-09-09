@@ -115,7 +115,7 @@ in
 
         output_path = mkOption {
           type = types.str;
-          default = "~/Documents/Pictures/Screenshots";
+          default = "~/Documents/Media/Pictures/Screenshots";
         };
       };
 
@@ -207,6 +207,7 @@ in
       grim
       (mkIf cfg.config.screenshare.enable jellyfin-ffmpeg)
       (mkIf cfg.config.screenshare.enable killall)
+      (mkIf cfg.config.screenshare.enable wf-recorder)
     ];
 
     # set some nice defaults for apps that pair well
@@ -242,13 +243,10 @@ in
       env = _JAVA_AWT_WM_NONREPARENTING,1
       env = QT_QPA_PLATFORMTHEME,qt5ct
       env = LIBSEAT_BACKEND,logind
-      env = LIBVA_DRIVER_NAME,nvidia
       env = XDG_SESSION_TYPE,wayland
       env = XDG_CURRENT_DESKTOP,Hyprland
       env = XDG_SESSION_DESKTOP,Hyprland
-      env = GBM_BACKEND,nvidia-drm
       env = __GLX_VENDOR_LIBRARY_NAME,nvidia
-      env = WLR_NO_HARDWARE_CURSORS,1
       env = __GL_VRR_ALLOWED,0
       env = GDK_BACKEND,wayland
       env = QT_AUTO_SCREEN_SCALE_FACTOR,1
@@ -289,10 +287,10 @@ in
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
           rounding = ${builtins.toString cfg.config.general.rounding}
-          blur = true
-          blur_size = 5
-          blur_passes = 3
-          blur_new_optimizations = true
+          # blur = true
+          # blur_size = 5
+          # blur_passes = 3
+          # blur_new_optimizations = true
           inactive_opacity = 0.85
           active_opacity = 0.9
 

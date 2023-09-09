@@ -98,6 +98,21 @@ in
             extension = ""; 
           };
 
+      ".config/obsidian/TemplateThemesNix/base16/theme.css".source = config.lib.stylix.colors {
+            template = builtins.readFile ./mustache/obsidian.css.mustache;
+            extension = ""; 
+          };
+      
+       ".config/obsidian/TemplateThemesNix/base16/manifest.json".text = ''
+        {
+          "name": "Stylix",
+          "version": "1.3.2",
+          "minAppVersion": "0.16.0",
+          "author": "Someone",
+          "authorUrl": "https://amongus.sus/"
+        }
+       '';
+
       ".config/qt5ct/qt5ct.conf".text = pkgs.lib.mkBefore (builtins.readFile ./mustache/qt5ct.conf.mustache);
       ".config/qt6ct/qt6ct.conf".text = pkgs.lib.mkBefore (builtins.readFile ./mustache/qt6ct.conf.mustache);
     };

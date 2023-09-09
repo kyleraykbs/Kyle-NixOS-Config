@@ -21,6 +21,7 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1u"
+    "libav-11.12"
   ];
 
   # Bootloader.
@@ -81,13 +82,13 @@
     unzip
     ddcutil
     v4l-utils
-    wf-recorder
     i2c-tools
+    python3
   ];
 
-  boot.supportedFilesystems = [ "ntfs" ];
+  boot.supportedFilesystems = [ "ntfs" "nfs" ];
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelModules = [ "i2c-dev" ];
+  boot.kernelModules = [ "i2c-dev" "v4l2loopback" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
