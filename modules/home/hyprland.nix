@@ -378,6 +378,7 @@ in
       exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       exec-once = ${pkgs.libsForQt5.kdeconnect-kde}/libexec/kdeconnectd
       exec-once = hyprctl dispatch workspace 1
+      exec-once = hyprctl setcursor Qogir 24
       ${cfg.extraConfig}
 
       exec-once=${
