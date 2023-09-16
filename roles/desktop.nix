@@ -67,14 +67,15 @@
 
   hardware.opengl = {
     enable = true;
-    # driSupport = true;
-    # driSupport32Bit = true;
+    driSupport = true;
+    driSupport32Bit = true;
   };
 
   environment.systemPackages = with pkgs; [
     neofetch
     github-desktop
     git
+    p7zip
     htop
     nix-index
     pciutils
@@ -82,9 +83,17 @@
     unzip
     ddcutil
     v4l-utils
+    distrobox
+    podman
     i2c-tools
     python3
   ];
+
+  environment = {
+    sessionVariables = {
+      LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
+    };
+  };
 
   boot.supportedFilesystems = [ "ntfs" "nfs" ];
   boot.kernelPackages = pkgs.linuxPackages_zen;

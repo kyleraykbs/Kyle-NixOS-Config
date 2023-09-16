@@ -34,15 +34,84 @@
   base.discord.enable = true;
   base.fish.enable = true;
 
+    base.neovim = {
+    enable = true;
+    plugins = {
+      nerdtree = {
+        enable = true;
+      };
+      startify = {
+        enable = true;
+      };
+      nerdcommenter = {
+        enable = true;
+        binds = {
+          defaultBinds = true;
+        };
+      };
+      ale = {
+        enable = true;
+      };
+      indentLine = {
+        enable = true;
+        config = {
+          char = "['┆', '│']";
+        };
+      };
+      whichKey = {
+        enable = true;
+      };
+      autoPairs = {
+        enable = true;
+      };
+      whiteSpace = {
+        enable = true;
+      };
+      airLine = {
+        enable = true;
+      };
+      easyMotion = {
+        enable = true;
+      };
+      fugitive = {
+        enable = true;
+      };
+      treeSitter = {
+        enable = true;
+      };
+      devicons = {
+        enable = true;
+      };
+      workSpace = {
+        enable = true;
+        config = {
+          autoSession = true;
+        };
+      };
+      autoSave = {
+        enable = true;
+        onStart = true;
+      };
+    };
+  };
+
   # base.waybar.enable = true;
   base.stylix.enable = true;
 
   base.hyprland.enable = true;
   base.hyprland.extraConfig = ''
+    # monitor=DP-4, 1920x1080@240, 1920x0, 1
+    # monitor=HDMI-A-2, 1920x1080@60, 0x0, 1
+    # monitor=HDMI-A-1,disable
+    # monitor=DP-1,disable  
+    # monitor=DVI-D-2, 1920x1080@60, 3840x0, 1
+    
+    ## REGULAR
     monitor=DP-1, 1920x1080@240, 1920x0, 1
     monitor=HDMI-A-1, 1920x1080@60, 0x0, 1
     #monitor=HDMI-A-1,transform,1
     monitor=DVI-D-2, 1920x1080@60, 3840x0, 1
+ 
     monitor=, preffered, auto, 1
 
     workspace = 1, monitor:DP-1, default:true

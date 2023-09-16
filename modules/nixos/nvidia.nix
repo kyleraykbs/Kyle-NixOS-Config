@@ -5,6 +5,7 @@ let
     mkIf
     mkOption
     types
+    mkMerge
     ;
 
   cfg = config.base.nvidia;
@@ -18,10 +19,7 @@ in
       default = false;
     };
 
-    waylandFixups = mkOption {
-      type = types.bool;
-      default = true;
-    };
+    waylandFixups = mkEnableOption "Nvidia Wayland Fixups";
   };
 
   config = mkIf cfg.enable {
@@ -40,7 +38,23 @@ in
 
     programs.hyprland.enableNvidiaPatches = true;
 
-    environment.sessionVariables = mkIf cfg.waylandFixups {
+
+    environment.systemPackages = with pkgs; [
+      nvidia-vaapi-driver
+      cudatoolkit
+    ];
+
+    # nixpkgs.config.cudaSupport = true;
+
+
+    environment.sessionVariables = mkMerge [{
+      # CUDA
+      CUDA_PATH = "${pkgs.cudatoolkit}";
+      EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib";
+      EXTRA_CCFLAGS="-I/usr/include";
+    }
+
+    (mkIf cfg.waylandFixups {
       LIBVA_DRIVER_NAME = "vdapu";
       WLR_NO_HARDWARE_CURSORS="1";
       GBM_BACKEND = "nvidia-drm";
@@ -50,24 +64,12 @@ in
       # WLR_BACKEND = "vulkan";
       # WLR_RENDERER = "vulkan";
       NIXOS_OZONE_WL = "1";
-    };
-
-    environment.systemPackages = with pkgs; [
-      nvidia-vaapi-driver
-    ];
+    })];
 
     hardware.nvidia = {
-      # Modesetting is needed for most wayland compositors
       modesetting.enable = true; #! THIS IS REQUIRED FOR HYPRLAND
-
-      # Use the open source version of the kernel module
-      # Only available on driver 515.43.04+
       open = cfg.open;
-
-      # Enable the nvidia settings menu
       # nvidiaSettings = true;
-
-      # Optionally, you may need to select the appropriate driver version for your specific GPU.
       # package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
   };

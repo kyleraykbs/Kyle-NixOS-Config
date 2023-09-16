@@ -32,17 +32,15 @@
     # 01:00.1 Audio device [0403]: NVIDIA Corporation TU104 HD Audio Controller [10de:10f8] (rev a1)
     # 01:00.2 USB controller [0c03]: NVIDIA Corporation TU104 USB 3.1 Host Controller [10de:1ad8] (rev a1)
     # 01:00.3 Serial bus controller [0c80]: NVIDIA Corporation TU104 USB Type-C UCSI Controller [10de:1ad9] (rev a1)
-
-    kernelParams = [ 
-      "intel_iommu=on" 
-      # "iommu=pt"
-      # "pcie_acs_override=downstream,multifunction" 
-      # "kvm.ignore_msrs=1" 
-      "vfio-pci.ids=10de:1e81,10de:10f8,10de:1ad8,10de:1ad9"
-    ];
-    kernelModules = [
-      "kvm-intel"
-    ];
+    base.virtualisation = {
+	vfioids = [
+          "10de:1e81"
+	  "10de:10f8"
+	  "10de:1ad8"
+	  "10de:1ad9"
+    	];
+    	intel.enable = true;
+    };
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

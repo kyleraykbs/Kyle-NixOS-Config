@@ -18,6 +18,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    base.nvidia.waylandFixups = true;
+    
     programs.hyprland = {
       enable = true;
 
