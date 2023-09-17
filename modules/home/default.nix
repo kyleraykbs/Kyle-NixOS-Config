@@ -10,5 +10,6 @@
     ./neovim.nix
     ./fish.nix
     ./waybar.nix
+    ./direnv.nix
   ];
 }
