@@ -91,7 +91,7 @@
     };
   };
 
-  base.pcmanfm.enable = true;
+  base.thunar.enable = true;
   base.kdeconnect.enable = true;
   base.discord.enable = true;
   base.fish.enable = true;

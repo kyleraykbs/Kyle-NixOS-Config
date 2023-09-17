@@ -27,20 +27,21 @@
     initrd = {
       availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
     };
+  };
 
     # 01:00.0 VGA compatible controller [0300]: NVIDIA Corporation TU104 [GeForce RTX 2080 SUPER] [10de:1e81] (rev a1)
     # 01:00.1 Audio device [0403]: NVIDIA Corporation TU104 HD Audio Controller [10de:10f8] (rev a1)
     # 01:00.2 USB controller [0c03]: NVIDIA Corporation TU104 USB 3.1 Host Controller [10de:1ad8] (rev a1)
     # 01:00.3 Serial bus controller [0c80]: NVIDIA Corporation TU104 USB Type-C UCSI Controller [10de:1ad9] (rev a1)
-    base.virtualisation = {
-	vfioids = [
-          "10de:1e81"
-	  "10de:10f8"
-	  "10de:1ad8"
-	  "10de:1ad9"
-    	];
-    	intel.enable = true;
-    };
+
+  base.virtualisation = {
+	  vfioids = [
+      "10de:1e81"
+      "10de:10f8"
+      "10de:1ad8"
+      "10de:1ad9"
+    ];
+    intel.enable = true;
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

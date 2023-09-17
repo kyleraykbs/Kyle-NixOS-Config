@@ -31,7 +31,7 @@
     bind = $mainMod, ESCAPE, exec, kitty sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"
   '';
 
-  base.pcmanfm.enable = true;
+  base.thunar.enable = true;
   base.kdeconnect.enable = true;
   base.discord.enable = true;
   base.direnv.enable = true;

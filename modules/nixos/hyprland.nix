@@ -5,6 +5,7 @@ let
     mkEnableOption
     mkIf
     mkOption
+    mkDefault
     types
     ;
   
@@ -18,7 +19,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    base.nvidia.waylandFixups = true;
+    base.nvidia.waylandFixups = mkDefault true;
     
     programs.hyprland = {
       enable = true;

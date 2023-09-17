@@ -102,6 +102,8 @@
     v4l2loopback
   ];
 
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
   security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
