@@ -374,6 +374,7 @@ in
       #############
 
       ${if config.base.waybar.enable then "exec-once=sleep 4; waybar" else ""}
+      ${if config.base.ulauncher.enable then "exec-once=ulauncher --hide-window" else ""}
       exec = swaybg -i "${config.base.wallpaper}"
       exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       exec-once = ${pkgs.libsForQt5.kdeconnect-kde}/libexec/kdeconnectd

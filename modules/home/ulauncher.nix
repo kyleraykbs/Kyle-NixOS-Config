@@ -42,20 +42,5 @@ in
         "theme-name": "${cfg.theme}"
       }
     '';
-
-    home.file.".config/ulauncher/shortcuts.json".text = ''
-      {
-          "66ac5d1b-1fe8-44e0-9210-7f04949d5e9e": {
-              "id": "66ac5d1b-1fe8-44e0-9210-7f04949d5e9e",
-              "name": "Search",
-              "keyword": "!s",
-              "cmd": "${cfg.searchurl}",
-              "icon": null,
-              "is_default_search": true,
-              "run_without_argument": false,
-              "added": 1695024245.3055885
-          }
-      }
-    '';
   };
 }
