@@ -21,9 +21,9 @@
       fsType = "vfat";
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/63742d2f-5863-4624-adb4-eb31517bd8a6"; }
-    ];
+  #swapDevices =
+  #  [ { device = "/dev/disk/by-uuid/63742d2f-5863-4624-adb4-eb31517bd8a6"; }
+  #  ];
 
     # Setup keyfile
   # boot.initrd.secrets = {

@@ -59,6 +59,8 @@ in
         enableRightBackColors = true;
       };
     };
+
+    base.ulauncher.theme = lib.mkDefault "base16";
     
     home.packages = with pkgs; [
       qt5ct
@@ -115,6 +117,25 @@ in
 
       ".config/qt5ct/qt5ct.conf".text = pkgs.lib.mkBefore (builtins.readFile ./mustache/qt5ct.conf.mustache);
       ".config/qt6ct/qt6ct.conf".text = pkgs.lib.mkBefore (builtins.readFile ./mustache/qt6ct.conf.mustache);
+
+      # ULauncher
+      ".config/ulauncher/user-themes/stylix-ulauncher/reset.css".source = config.lib.stylix.colors {
+            template = builtins.readFile ./mustache/ulauncher/reset.mustache;
+            extension = ""; 
+          };
+      ".config/ulauncher/user-themes/stylix-ulauncher/manifest.json".source = config.lib.stylix.colors {
+            template = builtins.readFile ./mustache/ulauncher/manifest.mustache;
+            extension = ""; 
+          };
+       ".config/ulauncher/user-themes/stylix-ulauncher/theme-gtk-3.20.css".source = config.lib.stylix.colors {
+            template = builtins.readFile ./mustache/ulauncher/theme-gtk-3.20.mustache;
+            extension = ""; 
+          };
+        ".config/ulauncher/user-themes/stylix-ulauncher/theme.css".source = config.lib.stylix.colors {
+            template = builtins.readFile ./mustache/ulauncher/theme.mustache;
+            extension = ""; 
+          };
+      ".config/ulauncher/user-themes/stylix-ulauncher/config.yaml".text = pkgs.lib.mkBefore (builtins.readFile ./mustache/ulauncher/config.yaml);
     };
   };
 }

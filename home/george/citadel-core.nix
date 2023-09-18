@@ -84,7 +84,7 @@
           bind = $mainMod, X, killactive,
           bind = $mainMod, M, exit,
           bind = $mainMod, SPACE, togglefloating,
-          bind = $mainMod, R, exec, wofi --show drun
+          bind = $mainMod, R, exec, ulauncher-toggle
           bind = $mainMod, F, fullscreen, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle
 

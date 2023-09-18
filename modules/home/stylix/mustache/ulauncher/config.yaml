@@ -1,0 +1,15 @@
+theme:
+  extension: .css
+  output: themes
+
+theme-gtk-3.20:
+  extension: .css
+  output: themes
+
+reset:
+  extension: .css
+  output: themes
+
+manifest:
+  extension: .json
+  output: themes

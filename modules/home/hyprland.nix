@@ -150,7 +150,7 @@ in
           bind = $mainMod, C, killactive,
           bind = $mainMod, M, exit,
           bind = $mainMod, SPACE, togglefloating,
-          bind = $mainMod, R, exec, wofi --show drun
+          bind = $mainMod, R, exec, ulauncher-toggle
           bind = $mainMod, F, fullscreen, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle
 
@@ -198,7 +198,6 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      wofi
       wl-clipboard
       vaapiVdpau
       slurp
@@ -209,6 +208,8 @@ in
       (mkIf cfg.config.screenshare.enable killall)
       (mkIf cfg.config.screenshare.enable wf-recorder)
     ];
+
+    base.ulauncher.enable = lib.mkDefault true;
 
     # set some nice defaults for apps that pair well
     services.dunst.settings.global.frame_width = lib.mkDefault (builtins.floor (cfg.config.general.border_size / 1.5));

@@ -27,6 +27,67 @@
     libreoffice
   ];
 
+  base.neovim = {
+    enable = true;
+    plugins = {
+      nerdtree = {
+        enable = true;
+      };
+      startify = {
+        enable = true;
+      };
+      nerdcommenter = {
+        enable = true;
+        binds = {
+          defaultBinds = true;
+        };
+      };
+      ale = {
+        enable = true;
+      };
+      indentLine = {
+        enable = true;
+        config = {
+          char = "['┆', '│']";
+        };
+      };
+      whichKey = {
+        enable = true;
+      };
+      autoPairs = {
+        enable = true;
+      };
+      whiteSpace = {
+        enable = true;
+      };
+      airLine = {
+        enable = true;
+      };
+      easyMotion = {
+        enable = true;
+      };
+      fugitive = {
+        enable = true;
+      };
+      treeSitter = {
+        enable = true;
+      };
+      devicons = {
+        enable = true;
+      };
+      workSpace = {
+        enable = true;
+        config = {
+          autoSession = true;
+        };
+      };
+      autoSave = {
+        enable = true;
+        onStart = true;
+      };
+    };
+  };
+
   base.hyprland.extraConfig = ''
     bind = $mainMod, ESCAPE, exec, kitty sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"
   '';
@@ -47,7 +108,7 @@
     bind = $mainMod, C, killactive,
     bind = $mainMod, M, exit,
     bind = $mainMod, SPACE, togglefloating,
-    bind = $mainMod, R, exec, wofi --show drun
+    bind = $mainMod, R, exec, ulauncher-toggle
     bind = $mainMod, F, fullscreen, # dwindle
     bind = $mainMod, J, togglesplit, # dwindle
 

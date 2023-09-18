@@ -131,7 +131,7 @@
           bind = $mainMod, E, exec, kitty lf
           bind = $mainMod, M, exit,
           bind = $mainMod, v, togglefloating,
-          bind = $mainMod, TAB, exec, wofi --show drun
+          bind = $mainMod, TAB, exec, ulauncher-toggle
           bind = $mainMod, F, fullscreen, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle
           bind = SUPER, ESCAPE, exec, kitty sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"

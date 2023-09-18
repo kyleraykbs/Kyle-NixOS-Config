@@ -11,6 +11,7 @@
     ./neovim.nix
     ./fish.nix
     ./waybar.nix
+    ./ulauncher.nix
     ./direnv.nix
   ];
 }
