@@ -42,7 +42,7 @@ in
     };
 
     vfioids = mkOption {
-      type = types.listOf types.string;
+      type = types.listOf types.str;
       default = [
        # Get these using lspci -nn
 

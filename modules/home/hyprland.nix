@@ -362,6 +362,12 @@ in
       #########
       '' else "")}
 
+      ### ulauncher
+      windowrule = float,^(ulauncher)$
+      windowrule = pin,^(ulauncher)$
+      windowrule = noborder,^(ulauncher)$
+      #########
+
       ## opacity ##
       windowrule=opacity 0.9 override 0.85 override,^(code-url-handler)$
       windowrule=opacity 0.9,^(pcmanfm)$
@@ -374,7 +380,7 @@ in
       #############
 
       ${if config.base.waybar.enable then "exec-once=sleep 4; waybar" else ""}
-      ${if config.base.ulauncher.enable then "exec-once=ulauncher --hide-window" else ""}
+      ${if config.base.ulauncher.enable then "exec-once=fish -c 'while true;ulauncher --hide-window --no-window-shadow;end;'" else ""}
       exec = swaybg -i "${config.base.wallpaper}"
       exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       exec-once = ${pkgs.libsForQt5.kdeconnect-kde}/libexec/kdeconnectd
