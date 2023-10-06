@@ -55,6 +55,7 @@ in
 
   config = mkIf cfg.enable {
     virtualisation = {
+      docker.enable = true;
       libvirtd.enable = true;
       spiceUSBRedirection.enable = true;
     };
@@ -64,6 +65,7 @@ in
     environment.systemPackages = with pkgs; [
       virt-manager
       qemu
+      looking-glass-client
     ];
 
     boot = {

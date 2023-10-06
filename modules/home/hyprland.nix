@@ -217,6 +217,7 @@ in
     
     programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [
       wlrobs
+      obs-nvfbc
     ];
     home.file.".config/hypr/hyprland.conf".text = ''
       # This is an example Hyprland config file.
@@ -386,6 +387,7 @@ in
       exec-once = ${pkgs.libsForQt5.kdeconnect-kde}/libexec/kdeconnectd
       exec-once = hyprctl dispatch workspace 1
       exec-once = hyprctl setcursor Qogir 24
+      exec-once = xdg-user-dirs-update
       ${cfg.extraConfig}
 
       exec-once=${

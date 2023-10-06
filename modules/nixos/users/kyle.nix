@@ -36,7 +36,7 @@ in
       users.kyle = {
         isNormalUser = true;
         description = "Kyle Kubis";
-        extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+        extraGroups = [ "networkmanager" "wheel" "libvirtd" "adbusers" "docker" ];
       };
     };
     

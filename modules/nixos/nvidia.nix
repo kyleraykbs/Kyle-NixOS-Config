@@ -32,6 +32,9 @@ in
         "nvidia_uvm"
         "nvidia_drm"
       ];
+      kernelParams = [
+	"video=vesafb:off,efifb:off"
+      ];
     };
 
     services.xserver.videoDrivers = ["nvidia"];

@@ -9,13 +9,6 @@
       fsType = "vfat";
     };
 
-  fileSystems."/nas" = 
-    {
-      device = "10.0.0.4:/volume1/Kyle";
-      fsType = "nfs";
-      options = [ "defaults" "user" "rw" ];
-    };
-
   swapDevices =
     [ { device = "/dev/disk/by-uuid/907492c7-2d87-49c9-8563-d60fccc44f7e"; }
     ];

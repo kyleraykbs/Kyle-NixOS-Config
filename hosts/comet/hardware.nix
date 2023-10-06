@@ -18,6 +18,7 @@
     vfioids = [
       "10de:1b81"
       "10de:10f0"
+      "1022:43bb"
     ];
     amd.enable = true;
   };

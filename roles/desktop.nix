@@ -1,5 +1,8 @@
 {pkgs, config, inputs, lib, ...}: {
-  imports = [inputs.stylix.nixosModules.stylix];
+  imports = [
+    inputs.stylix.nixosModules.stylix
+    ./universal.nix
+  ];
 
   programs = {
     fish = { enable = true; };
@@ -101,6 +104,8 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
+
+  programs.adb.enable = true;
 
   services.gvfs.enable = true;
   services.tumbler.enable = true;
