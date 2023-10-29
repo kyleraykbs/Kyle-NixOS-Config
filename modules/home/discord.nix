@@ -16,8 +16,8 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       (discord.override {
-        withOpenASAR = true;
-        withVencord = true;
+        withOpenASAR = false;
+        withVencord = false;
         withTTS = true;
       })
     ];

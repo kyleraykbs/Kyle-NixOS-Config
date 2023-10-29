@@ -8,6 +8,7 @@
 
   base.virtualisation.enable = true;
   base.nvidia.enable = true;
+  base.bluetooth.enable = true;
 
   networking.hostName = "comet";
   

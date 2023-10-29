@@ -111,7 +111,7 @@
     monitor=HDMI-A-1, 1920x1080@60, 0x0, 1
     #monitor=HDMI-A-1,transform,1
     monitor=DVI-D-2, 1920x1080@60, 3840x0, 1
- 
+    monitor=DVI-D-1, 1280x1024@60, 5760x0, 1, transform, 1
     monitor=, preffered, auto, 1
 
     workspace = 1, monitor:DP-1, default:true
