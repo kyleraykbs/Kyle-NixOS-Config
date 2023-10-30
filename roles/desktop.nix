@@ -25,7 +25,6 @@
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1u"
     "libav-11.12"
-    "electron-12.2.3"
   ];
 
   # Bootloader.
@@ -76,7 +75,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    etcher
     neofetch
     github-desktop
     git
