@@ -1,6 +1,7 @@
 {config, lib, pkgs, ...}: 
 {
   imports = [
+    ./hardware/monitors.nix
     ./stylix
     ./hyprland.nix
     ./kdeconnect.nix

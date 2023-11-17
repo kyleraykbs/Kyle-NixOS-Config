@@ -141,6 +141,18 @@ in
         };
       };
 
+      ocr = {
+	  enable = mkOption {
+	    type = types.bool;
+	    default = true;
+	  };
+
+	  keybind = mkOption {
+	    type = types.str;
+            default = "$mainMod, x";
+	  };
+      };
+
       binds = mkOption {
         type = types.str;
         default = ''
@@ -207,6 +219,7 @@ in
       (mkIf cfg.config.screenshare.enable jellyfin-ffmpeg)
       (mkIf cfg.config.screenshare.enable killall)
       (mkIf cfg.config.screenshare.enable wf-recorder)
+      (mkIf cfg.config.ocr.enable tesseract)
     ];
 
     base.ulauncher.enable = lib.mkDefault true;
@@ -227,10 +240,7 @@ in
       #
       # Please note not all available settings / options are set here.
       # For a full list, see the wiki
-      #
-
-      # See https://wiki.hyprland.org/Configuring/Monitors/
-      monitor=,preffered,auto,auto
+      # 
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
@@ -254,6 +264,48 @@ in
       env = QT_QPA_PLATFORM,wayland;xcb
       env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
       env = MOZ_ENABLE_WAYLAND,1
+
+      ${let
+	  lines = builtins.concatStringsSep "\n" (map (x:
+	    let
+	      resolutionPart = if x ? resolution then
+	        if x.resolution == "default" then
+	          "preferred"
+	        else if x.resolution == "maxres" then
+	          "highres"
+	        else if x.resolution == "maxrr" then
+	          "highrr"
+	        else
+	          "${x.resolution}@${if x ? framerate then builtins.toString x.framerate else "60"}"
+	      else
+	        "preferred";
+	      positionPart = if x ? position then x.position else "auto";
+	      scalePart = if x ? scale then builtins.toString x.scale else "1";
+	    in
+	    "monitor=${x.adapter},${resolutionPart},${positionPart},${scalePart}${if x ? transform then ",transform,${builtins.toString x.transform}" else ""}${if x ? mirroring then ",mirror,${x.mirroring}" else ""}"
+	  ) config.base.monitors.monitors);
+	in
+	lines
+	}
+
+      ${let x = config.base.monitors.defaultMonitor; in
+            let
+              resolutionPart = if x ? resolution then
+                if x.resolution == "default" then
+                  "preferred"
+                else if x.resolution == "maxres" then
+                  "highres"
+                else if x.resolution == "maxrr" then
+                  "highrr"
+                else
+                  "${x.resolution}@${if x ? framerate then builtins.toString x.framerate else "60"}"
+              else
+                "preferred";
+              positionPart = if x ? position then x.position else "auto";
+              scalePart = if x ? scale then builtins.toString x.scale else "1";
+            in
+            "monitor=,${resolutionPart},${positionPart},${scalePart}${if x ? transform then ",transform,${builtins.toString x.transform}" else ""}${if x ? mirroring then ",mirror,${x.mirroring}" else ""}"
+	}
 
       # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
       input {
@@ -343,6 +395,8 @@ in
       ${(if cfg.config.screenshare.enable then ''bind = ${cfg.config.screenshare.stopkeybind},exec,killall -9 wf-recorder; killall -9 ffplay; hyprctl keyword debug:damage_tracking ${builtins.toString (if cfg.config.debug.damage_tracking then 2 else 1)}'' else "")}
       ${(if cfg.config.screenshare.enable then ''bind = ${cfg.config.screenshare.obskeybind},exec,killall -9 ffplay; ffplay /dev/video0'' else "")}
       bind = ${cfg.config.screenshot.keybind},exec,slurp | grim -g - ${cfg.config.screenshot.output_path}/$(date +'screenshot_%Y-%m-%d-%H%M%S.png'); wl-copy < ${cfg.config.screenshot.output_path}/$(ls ${cfg.config.screenshot.output_path}/ -tp | head -1)
+
+      ${if cfg.config.ocr.enable then ''bind = ${cfg.config.ocr.keybind},exec,hyprctl dispatch toggleopaque; slurp | grim -g - ocr.png; hyprctl dispatch toggleopaque; tesseract ocr.png ocr -l eng --oem 1; cat ocr.txt | wl-copy; rm ocr.txt ocr.png'' else ""}
 
       ### kitty
       windowrule = animation popin,^(kitty)$ # sets the animation style for kitty

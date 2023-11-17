@@ -8,6 +8,7 @@
   };
 
   home.packages = with pkgs; [
+    unetbootin
     qogir-icon-theme
     quintom-cursor-theme
     authenticator
@@ -99,21 +100,17 @@
   base.stylix.enable = true;
 
   base.hyprland.enable = true;
+  base.monitors = {
+    monitors = [
+      {adapter="HDMI-A-1"; resolution="1920x1080"; framerate=60; position="0x0";}
+      {adapter="DP-1"; resolution="1920x1080"; framerate=240; position="1920x0";}
+      {adapter="DVI-D-2"; resolution="1920x1080"; framerate=60; position="3840x0";}
+      {adapter="DVI-D-1"; resolution="1280x1024"; framerate=60; position="5760x0"; transform=1;}
+    ];
+    #defaultMonitor = {resolution="default"; mirroring="DVI-D-2";};
+  };
   base.hyprland.extraConfig = ''
-    # monitor=DP-4, 1920x1080@240, 1920x0, 1
-    # monitor=HDMI-A-2, 1920x1080@60, 0x0, 1
-    # monitor=HDMI-A-1,disable
-    # monitor=DP-1,disable  
-    # monitor=DVI-D-2, 1920x1080@60, 3840x0, 1
-    
     ## REGULAR
-    monitor=DP-1, 1920x1080@240, 1920x0, 1
-    monitor=HDMI-A-1, 1920x1080@60, 0x0, 1
-    #monitor=HDMI-A-1,transform,1
-    monitor=DVI-D-2, 1920x1080@60, 3840x0, 1
-    monitor=DVI-D-1, 1280x1024@60, 5760x0, 1, transform, 1
-    monitor=, preffered, auto, 1
-
     workspace = 1, monitor:DP-1, default:true
     workspace = 2, monitor:DP-1, default:false
     workspace = 3, monitor:DP-1, default:false
