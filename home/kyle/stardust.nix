@@ -7,7 +7,14 @@
     cursorTheme.name = "Qogir";
   };
 
+  base.lutris.enable = true;
+
   home.packages = with pkgs; [
+    arduino
+    cemu
+    yuzu
+    openscad
+    prusa-slicer
     qogir-icon-theme
     quintom-cursor-theme
     authenticator
@@ -88,8 +95,17 @@
     };
   };
 
+  base.monitors = {
+    monitors = [
+      {adapter="eDP-1"; resolution="1600x900"; framerate=60; position="0x0";}
+    ];
+    defaultMonitor = {resolution="default"; mirroring="eDP-1";};
+  };
+
   base.hyprland.extraConfig = ''
     bind = $mainMod, ESCAPE, exec, kitty sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"
+    monitor=eDP-1, 1600x900, auto, 1
+    monitor=,highres,auto,1,mirror,eDP-1
   '';
 
   base.thunar.enable = true;
@@ -100,7 +116,7 @@
 
   base.stylix.enable = true;
 
-  base.hyprland.enable = true;
+  base.hyprland.enable = true;  
   base.hyprland.config.binds = ''
     # See https://wiki.hyprland.org/Configuring/Keywords/ for more
     $mainMod = ALT

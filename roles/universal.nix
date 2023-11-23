@@ -1,6 +1,6 @@
 {pkgs, ...}: {
 	environment.systemPackages = with pkgs; [
-          xdg-utils
+    xdg-utils
 	  xdg-user-dirs
 	];
   environment.etc."xdg/user-dirs.defaults".text = ''

@@ -14,5 +14,6 @@
     ./waybar.nix
     ./ulauncher.nix
     ./direnv.nix
+    ./lutris.nix
   ];
 }

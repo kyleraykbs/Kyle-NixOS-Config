@@ -240,7 +240,6 @@ in
       #
       # Please note not all available settings / options are set here.
       # For a full list, see the wiki
-      # 
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 

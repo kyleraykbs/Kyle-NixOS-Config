@@ -13,5 +13,6 @@
     ./nvidia.nix
     ./greetd.nix
     ./bluetooth.nix
+    ./hardware/intel.nix
   ];
 }
