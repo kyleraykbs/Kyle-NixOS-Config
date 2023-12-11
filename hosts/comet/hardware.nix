@@ -16,8 +16,8 @@
 
   base.virtualisation = {
     vfioids = [
-      "10de:1b81"
-      "10de:10f0"
+      "10de:2805"
+      "10de:22bd"
       "1022:43bb"
     ];
     amd.enable = true;

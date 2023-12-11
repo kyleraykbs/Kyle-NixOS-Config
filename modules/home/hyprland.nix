@@ -38,12 +38,12 @@ in
 
         border_color_1 = mkOption {
           type = types.str;
-          default = config.lib.stylix.colors.base0A-hex or "ffffff";
+          default = config.lib.stylix.colors.base02-hex or "ffffff";
         };
 
         border_color_2 = mkOption {
           type = types.str;
-          default = config.lib.stylix.colors.base08-hex or "ffffff";
+          default = config.lib.stylix.colors.base04-hex or "ffffff";
         };
 
         gaps_in = mkOption {
@@ -63,7 +63,7 @@ in
 
         rounding = mkOption {
           type = types.int;
-          default = 4;
+          default = 0;
         };
       };
 
@@ -216,6 +216,7 @@ in
       polkit_gnome
       wlr-randr
       grim
+      swaybg
       (mkIf cfg.config.screenshare.enable jellyfin-ffmpeg)
       (mkIf cfg.config.screenshare.enable killall)
       (mkIf cfg.config.screenshare.enable wf-recorder)
@@ -437,7 +438,7 @@ in
 
       ${if config.base.waybar.enable then "exec-once=sleep 4; waybar" else ""}
       ${if config.base.ulauncher.enable then "exec-once=fish -c 'while true;ulauncher --hide-window --no-window-shadow;end;'" else ""}
-      exec = swaybg -i "${config.base.wallpaper}"
+      exec = killall -9 swaybg; swaybg --mode fill -i "${config.base.wallpaper}"
       exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       exec-once = ${pkgs.libsForQt5.kdeconnect-kde}/libexec/kdeconnectd
       exec-once = hyprctl dispatch workspace 1

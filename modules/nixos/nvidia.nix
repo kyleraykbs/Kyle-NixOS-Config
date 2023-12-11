@@ -41,7 +41,7 @@ in
 
     programs.hyprland.enableNvidiaPatches = true;
 
-
+    hardware.opengl.driSupport32Bit = true;
     environment.systemPackages = with pkgs; [
       nvidia-vaapi-driver
       cudatoolkit

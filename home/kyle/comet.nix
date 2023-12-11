@@ -7,7 +7,10 @@
     cursorTheme.name = "Qogir";
   };
 
+
   home.packages = with pkgs; [
+    vlc
+    terminator
     unetbootin
     qogir-icon-theme
     quintom-cursor-theme
@@ -104,9 +107,12 @@
     monitors = [
       {adapter="HDMI-A-1"; resolution="1920x1080"; framerate=60; position="0x0";}
       {adapter="DP-1"; resolution="1920x1080"; framerate=240; position="1920x0";}
-      {adapter="DVI-D-2"; resolution="1920x1080"; framerate=60; position="3840x0";}
-      {adapter="DVI-D-1"; resolution="1280x1024"; framerate=60; position="5760x0"; transform=1;}
+      {adapter="DVI-D-1"; resolution="1920x1080"; framerate=60; position="3840x0";}
+      {adapter="DVI-D-2"; resolution="1280x1024"; framerate=60; position="5760x0"; transform=1;}
     ];
+    workspaces = {
+      mouseBased = true;
+    };
     #defaultMonitor = {resolution="default"; mirroring="DVI-D-2";};
   };
   base.hyprland.extraConfig = ''
@@ -124,6 +130,17 @@
     workspace = 9, monitor:HDMI-A-1, default:false
 
     bind = $mainMod, ESCAPE, exec, kitty sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"
+
+    bind = , code:90, workspace, 1
+    bind = , code:87, workspace, 1
+    bind = , code:88, workspace, 2
+    bind = , code:89, workspace, 3
+    bind = , code:83, workspace, 4
+    bind = , code:84, workspace, 5
+    bind = , code:85, workspace, 6
+    bind = , code:79, workspace, 7
+    bind = , code:80, workspace, 8
+    bind = , code:81, workspace, 9
   '';
 
   services = {

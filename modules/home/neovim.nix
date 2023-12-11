@@ -289,6 +289,9 @@ in
         let mapleader = "${cfg.binds.leader}"
         nnoremap ${cfg.plugins.whichKey.binds.leader} :WhichKey <Space><CR><space>
         nnoremap ${cfg.plugins.nerdtree.binds.toggle} :NERDTreeToggle<cr>
+	set tabstop=4
+	set shiftwidth=4
+	set expandtab
         ${cfg.binds.other}
         " options
         let g:NERDCreateDefaultMappings = ${(if cfg.plugins.nerdcommenter.binds.defaultBinds then "1" else "0")}

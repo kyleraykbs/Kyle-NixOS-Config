@@ -21,14 +21,16 @@ in
         # {resolution="1920x1080"; framerate=60; position="0x0"; adapter="DP-1"; scale=1; transform=0; mirroring="DP-2"}
       ];
     };
+    workspaces = {
+      mouseBased = mkOption {
+        type = types.bool;
+	default = true;
+      };
+    };
     defaultMonitor = mkOption {
       type = types.attrs;
       # Same thing as monitors just without the adapter property
       default = {resolution="default"; scale=1;};
     };
-  };
-
-  config = mkIf cfg.enable {
-
   };
 }
