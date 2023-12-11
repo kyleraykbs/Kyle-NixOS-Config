@@ -250,6 +250,7 @@ in
       # source = ~/.config/hypr/myColors.conf
 
       # Some default env vars.
+      env = WLR_NO_HARDWARE_CURSORS,1
       env = XCURSOR_SIZE,24
       env = _JAVA_AWT_WM_NONREPARENTING,1
       env = QT_QPA_PLATFORMTHEME,qt5ct
@@ -320,6 +321,7 @@ in
 
           touchpad {
               natural_scroll = false
+      	      disable_while_typing = false
           }
       }
 

@@ -10,6 +10,7 @@
   base.lutris.enable = true;
 
   home.packages = with pkgs; [
+    terminator
     arduino
     cemu
     yuzu
