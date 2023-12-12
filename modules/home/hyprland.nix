@@ -411,8 +411,8 @@ in
       ### ffplay
       windowrule = animation popin,^(ffplay)$
       windowrule = float,^(ffplay)$
-      windowrule = size 100% 100%,^(ffplay)$
-      windowrule = move 13% 100%,^(ffplay)$
+      windowrule = size 1920 1080,^(ffplay)$
+      windowrule = move 0% 100%,^(ffplay)$
       # windowrule = monitor 2,^(ffplay)$
       windowrule = pin,^(ffplay)$
       windowrule = noborder,^(ffplay)$
