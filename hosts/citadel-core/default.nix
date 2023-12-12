@@ -8,9 +8,6 @@
 
   networking.hostName = "citadel-core";
 
-  base.nvidia.enable = true;
-  base.nvidia.waylandFixups = false;
-  
   base.user.george.enable = true;
   base.greetd = {
     enable = true;

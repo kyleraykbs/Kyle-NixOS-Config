@@ -8,13 +8,13 @@
     useDHCP = false;
 
     interfaces = {
-      enp0s31f6.useDHCP = true;
+      enp3s0.useDHCP = true;
       br0.useDHCP = true;
     };
 
     bridges = {
       "br0" = {
-        interfaces = [ "enp0s31f6" ];
+        interfaces = [ "enp3s0" ];
       };
     };
   };
@@ -29,17 +29,12 @@
     };
   };
 
-    # 01:00.0 VGA compatible controller [0300]: NVIDIA Corporation TU104 [GeForce RTX 2080 SUPER] [10de:1e81] (rev a1)
-    # 01:00.1 Audio device [0403]: NVIDIA Corporation TU104 HD Audio Controller [10de:10f8] (rev a1)
-    # 01:00.2 USB controller [0c03]: NVIDIA Corporation TU104 USB 3.1 Host Controller [10de:1ad8] (rev a1)
-    # 01:00.3 Serial bus controller [0c80]: NVIDIA Corporation TU104 USB Type-C UCSI Controller [10de:1ad9] (rev a1)
+  base.intel.enable = true;
 
   base.virtualisation = {
 	  vfioids = [
-      "10de:1e81"
-      "10de:10f8"
-      "10de:1ad8"
-      "10de:1ad9"
+      "10de:2684"
+      "10de:22ba"
     ];
     intel.enable = true;
   };
