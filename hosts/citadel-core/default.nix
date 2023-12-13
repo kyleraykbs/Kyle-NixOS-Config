@@ -65,8 +65,7 @@
                     }
                 ];
             };
-            boilerplate = ''
-            <controller type="usb" index="0" model="qemu-xhci" ports="15">
+            boilerplate = ''<controller type="usb" index="0" model="qemu-xhci" ports="15">
       <address type="pci" domain="0x0000" bus="0x02" slot="0x00" function="0x0"/>
     </controller>
     <controller type="pci" index="0" model="pcie-root"/>
@@ -145,8 +144,7 @@
     </controller>
     <controller type="virtio-serial" index="0">
       <address type="pci" domain="0x0000" bus="0x03" slot="0x00" function="0x0"/>
-    </controller>
-                '';
+    </controller>'';
         }
     ];
   };
