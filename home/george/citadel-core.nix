@@ -78,6 +78,7 @@
   '';
 
   base.hyprland.config.screenshare.stopkeybind = "ALT SHIFT, A";
+  base.hyprland.config.ocr.keybind = "$mainMod, z";
 
   base.hyprland.config.binds = ''
           # See https://wiki.hyprland.org/Configuring/Keywords/ for more
