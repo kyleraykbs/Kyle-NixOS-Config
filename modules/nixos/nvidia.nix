@@ -66,7 +66,6 @@ in
       # XDG_SESSION_TYPE = "wayland";
       # WLR_BACKEND = "vulkan";
       # WLR_RENDERER = "vulkan";
-      NIXOS_OZONE_WL = "1";
     })];
 
     hardware.nvidia = {
