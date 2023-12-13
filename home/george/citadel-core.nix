@@ -51,7 +51,7 @@
 
   base.monitors = {
     monitors = [
-      {resolution="3840x2160"; framerate=60; position="0x0"; adapter="HDMI-A-1"; scale=2; transform=1;}
+      {resolution="3840x2160"; framerate=60; position="0x0"; adapter="HDMI-A-1"; scale=2; transform=0;}
     ];
   };
 
