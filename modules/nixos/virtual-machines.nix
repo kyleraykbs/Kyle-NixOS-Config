@@ -133,8 +133,8 @@ rec {
                         <vmport state='off'/>
                       </features>
                       <cpu mode='host-model' check='partial'>
-                        <topology sockets='1' dies='1' cores='${builtins.toString virt.cpu.cores}' threads='2'/>
-                        <feature policy='require' name='topoext'/>
+                        <topology sockets='1' dies='1' cores='${builtins.toString virt.cpu.cores}' threads='2'/> 
+                        ${(mkIf cfg.amd.enable "<feature policy='require' name='topoext'/>")}
                       </cpu>
                       <clock offset='localtime'>
                         <timer name='rtc' tickpolicy='catchup'/>
