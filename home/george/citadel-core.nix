@@ -49,6 +49,11 @@
     };
   };
 
+  base.monitors = {
+    monitors = [
+      {resolution="3840x2160"; framerate=60; position="0x0"; adapter="HDMI-A-1"; scale=2; transform=0; mirroring="DP-2";}
+    ];
+  };
 
   base.hyprland.config.dwindle = {
     no_gaps_when_only = true;
@@ -59,9 +64,6 @@
     {command="discord"; workspace=1; time=1;}
   ];
   base.hyprland.extraConfig = ''
-    monitor=HDMI-A-1, 3840x2160@60, 0x0, 2
-    monitor=DP-2, 3840x2160@60, 0x0, 2
-
     workspace = 1, monitor:DP-2, default:true
     workspace = 2, monitor:DP-2, default:false
     workspace = 3, monitor:DP-2, default:false

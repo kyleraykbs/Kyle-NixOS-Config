@@ -326,6 +326,10 @@ in
           }
       }
 
+      xwayland {
+        force_zero_scaling = true
+      }
+
       general {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
 

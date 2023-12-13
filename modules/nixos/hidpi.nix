@@ -9,7 +9,7 @@ let
 in
 {
   options.base.hidpi = {
-    enable = mkEnableOption "My Thing";
+    enable = mkEnableOption "";
   };
 
   config = mkIf cfg.enable {

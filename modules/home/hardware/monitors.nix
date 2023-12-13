@@ -18,7 +18,7 @@ in
         # TIP: for resolution if you put "maxres" it will use the highest resolution, if you put "maxrr" it will pick the highest refresh rate, or if you put "default" it will pick the monitors default resolutio; all of these of course invalidate frame_rate.
 	#
         # TEMPLATE OPTIONS
-        # {resolution="1920x1080"; framerate=60; position="0x0"; adapter="DP-1"; scale=1; transform=0; mirroring="DP-2"}
+        # {resolution="1920x1080"; framerate=60; position="0x0"; adapter="DP-1"; scale=1; transform=0; mirroring="DP-2";}
       ];
     };
     workspaces = {
