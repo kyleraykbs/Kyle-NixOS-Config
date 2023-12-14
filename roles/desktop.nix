@@ -65,19 +65,6 @@
   };
 
 
-
-  environment.etc = {
-      "/etc/pipewire/pipewire.conf.d/pipewire.conf".text = ''
-            context.properties = {
-              link.max-buffers = 64
-              default.clock.rate = 48000
-              default.clock.quantum       = 128
-              default.clock.min-quantum   = 32
-              default.clock.max-quantum   = 1024
-            }
-      '';
-    };
-
   services.xserver.enable = true;
   services.xserver.libinput.enable = true;
   services.xserver.displayManager.sddm.enable = lib.mkDefault true;
@@ -109,7 +96,7 @@
   environment = {
     sessionVariables = {
       #LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
-      PULSE_LATENCY_MSEC="50";
+      PULSE_LATENCY_MSEC="75";
     };
   };
 
