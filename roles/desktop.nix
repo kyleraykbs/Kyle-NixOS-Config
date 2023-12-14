@@ -64,31 +64,18 @@
     pulse.enable = true;
   };
 
-  environment.etc = {
-      "pipewire/pipewire.conf.d/92-pipewire.conf".text = ''
-        context.properties = {
-          link.max-buffers = 128
-          default.clock.rate = 48000
-          default.clock.quantum = 128
-          default.clock.min-quantum = 1024 
-          default.clock.max-quantum = 16384
-        }
-      '';
 
-      "wireplumber/main.lua.d/99-alsa-config.lua".text = ''
-          alsa_monitor.rules = {
-            {
-              matches = {{{ "node.name", "matches", "alsa_output.*" }}};
-              apply_properties = {
-                ["audio.format"] = "S32LE",
-                ["audio.rate"] = "96000", -- for USB soundcards it should be twice your desired rate
-                ["api.alsa.period-size"] = 2048, -- defaults to 1024, tweak by trial-and-error
-                ["api.alsa.use-acp"] = 0, 
-                ["session.suspend-timeout-seconds"] = 0, 
-              },
-            },
-          }
-        '';
+
+  environment.etc = {
+      "/etc/pipewire/pipewire.conf.d/pipewire.conf".text = ''
+            context.properties = {
+              link.max-buffers = 64
+              default.clock.rate = 48000
+              default.clock.quantum       = 128
+              default.clock.min-quantum   = 32
+              default.clock.max-quantum   = 1024
+            }
+      '';
     };
 
   services.xserver.enable = true;
@@ -122,6 +109,7 @@
   environment = {
     sessionVariables = {
       #LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
+      PULSE_LATENCY_MSEC="50";
     };
   };
 
