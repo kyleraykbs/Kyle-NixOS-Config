@@ -103,7 +103,7 @@
     };
   };
 
-  boot.supportedFilesystems = [ "ntfs" "nfs" ];
+  boot.supportedFilesystems = [ "ntfs" "nfs" "btrfs" ];
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.kernelModules = [ "i2c-dev" "v4l2loopback" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
