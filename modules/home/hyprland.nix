@@ -162,7 +162,7 @@ in
           bind = $mainMod, C, killactive,
           bind = $mainMod, M, exit,
           bind = $mainMod, SPACE, togglefloating,
-          bind = $mainMod, R, exec, ulauncher-toggle
+          bind = $mainMod, R, exec, ${if config.base.rofi.enable then "rofi -show drun -theme .config/rofi/main.rasi" else "ulauncher-toggle"}
           bind = $mainMod, F, fullscreen, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle
 
@@ -216,6 +216,7 @@ in
       polkit_gnome
       wlr-randr
       grim
+      wl-clip-persist
       swaybg
       (mkIf cfg.config.screenshare.enable jellyfin-ffmpeg)
       (mkIf cfg.config.screenshare.enable killall)
@@ -223,7 +224,7 @@ in
       (mkIf cfg.config.ocr.enable tesseract)
     ];
 
-    base.ulauncher.enable = lib.mkDefault true;
+    base.rofi.enable = lib.mkDefault true;
 
     # set some nice defaults for apps that pair well
     services.dunst.settings.global.frame_width = lib.mkDefault (builtins.floor (cfg.config.general.border_size / 1.5));
@@ -360,6 +361,8 @@ in
           col.shadow = rgba(1a1a1aee)
       }
 
+      layerrule = blur,rofi
+
       animations {
         $(cfg.config.anims)
       }
@@ -449,6 +452,7 @@ in
       exec-once = hyprctl dispatch workspace 1
       exec-once = hyprctl setcursor Qogir 24
       exec-once = xdg-user-dirs-update
+      exec-once = wl-clip-persist --clipboard regular
       ${cfg.extraConfig}
 
       exec-once=${

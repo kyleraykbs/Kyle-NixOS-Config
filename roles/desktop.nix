@@ -10,6 +10,8 @@
 
   services.flatpak.enable = true;
 
+  hardware.opentabletdriver.enable = true;
+
   stylix.image = config.base.wallpaper;
   stylix.polarity = "dark";
   stylix.autoEnable = lib.mkDefault false;
@@ -17,6 +19,7 @@
   base.flakes.enable = true;
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowInsecurePredicate = pkg: true;
 
   fonts.packages = with pkgs; [
     font-awesome

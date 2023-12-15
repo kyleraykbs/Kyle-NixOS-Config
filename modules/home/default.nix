@@ -15,5 +15,6 @@
     ./ulauncher.nix
     ./direnv.nix
     ./lutris.nix
+    ./rofi.nix
   ];
 }
