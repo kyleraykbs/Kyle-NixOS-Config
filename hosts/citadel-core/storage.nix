@@ -15,7 +15,7 @@
     };
 
   fileSystems."/home/george/All Files" =
-    { device = "/dev/disk/by-uuid/nvme0n1p4";
+    { device = "/dev/nvme0n1p4";
       fsType = "ext4";
     };
 
