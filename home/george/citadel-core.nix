@@ -58,6 +58,9 @@
   base.hyprland.config.dwindle = {
     no_gaps_when_only = true;
   };
+  base.hyprland.config.performance = {
+    vfr = false;
+  };
   base.hyprland.enable = true;
   base.hyprland.startupApps = [
     {command="virt-manager"; workspace=5; time=1;}

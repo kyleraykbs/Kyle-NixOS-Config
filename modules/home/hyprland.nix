@@ -107,6 +107,13 @@ in
         };
       };
 
+      performance = {
+          vfr = mkOption {
+            type = types.bool;
+            default = true;
+          };
+      };
+
       dwindle = {
         pseudotile = mkOption {
           type = types.bool;
@@ -348,7 +355,7 @@ in
       }
 
       misc {
-          vfr = false
+          vfr = ${if cfg.config.performance.vfr then "true" else "false"}
       }
 
       general {
