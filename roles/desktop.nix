@@ -73,16 +73,17 @@
           {
             name = "libpipewire-module-protocol-pulse";
             args = {
-              pulse.min.req = "2048/48000";
-              pulse.default.req = "2048/48000";
-              pulse.max.req = "4096/48000";
-              pulse.min.quantum = "2048/48000";
-              pulse.max.quantum = "3082/48000";
+              pulse.min.req = "4096/48000";
+              pulse.default.req = "8192/48000";
+              pulse.max.req = "16384/48000";
+              pulse.min.quantum = "4096/48000";
+              pulse.quantum = "8192/48000";
+              pulse.max.quantum = "16384/48000";
             };
           }
         ];
         stream.properties = {
-          node.latency = "2048/48000";
+          node.latency = "96000/48000";
           resample.quality = 1;
         };
       };
@@ -92,8 +93,8 @@
               matches = {{{ "node.name", "matches", "alsa_output.*" }}};
               apply_properties = {
                 ["audio.format"] = "S32LE",
-                ["audio.rate"] = "48000", -- for USB soundcards it should be twice your desired rate
-                ["api.alsa.period-size"] = 16384, -- defaults to 1024, tweak by trial-and-error
+                ["audio.rate"] = "96000", -- for USB soundcards it should be twice your desired rate
+                ["api.alsa.period-size"] = 2048, -- defaults to 1024, tweak by trial-and-error
                 -- ["api.alsa.disable-batch"] = true, -- generally, USB soundcards use the batch mode
               },
             },
@@ -101,21 +102,18 @@
         '';
        "pipewire/pipewire.conf.d/99-pipewire-highlatency.lua".text = ''
            context.properties = {
-               default.clock.allowed-rates = [ 48000 ]
-               default.clock.rate = 48000
-               default.clock.min-quantum = 1024
-               default.clock.max-quantum = 8192
-               default.clock.quantum = 2048
-               default.clock.quantum-limit = 8192
+               default.clock.allowed-rates = [ 96000 ]
+               default.clock.rate = 96000
+               default.clock.quantum = 8192
+               default.clock.min-quantum = 4096
+               default.clock.max-quantum = 16384
            }
         '';
     };
   environment = {
     sessionVariables = {
       #LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
-      PULSE_LATENCY_MSEC="75";
-      PIPEWIRE_QUANTUM="2048/48000";
-      PIPEWIRE_LATENCY="2048/48000";
+      PULSE_LATENCY_MSEC="100";
     };
   };
 
