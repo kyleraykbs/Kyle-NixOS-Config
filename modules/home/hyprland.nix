@@ -364,7 +364,7 @@ in
 
           rounding = ${builtins.toString cfg.config.general.rounding}
           blur {
-              enabled = ${builtins.toString cfg.config.general.blur}
+              enabled = ${if cfg.config.general.blur then "true" else "false"}
               new_optimizations = true
           }
           inactive_opacity = ${builtins.toString cfg.config.general.inactive_opacity}
