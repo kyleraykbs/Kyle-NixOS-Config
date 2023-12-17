@@ -65,7 +65,22 @@ in
           type = types.int;
           default = 0;
         };
-      };
+
+        blur = mkOption {
+            type = types.bool;
+            default = true;
+        };
+
+        active_opacity = mkOption {
+            type = types.float;
+            default = 0.9;
+        };
+
+        inactive_opacity = mkOption {
+            type = types.float;
+            default = 0.85;
+        };
+    };
 
       anims = mkOption {
         type = types.str;
@@ -348,12 +363,12 @@ in
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
           rounding = ${builtins.toString cfg.config.general.rounding}
-          # blur = true
-          # blur_size = 5
-          # blur_passes = 3
-          # blur_new_optimizations = true
-          inactive_opacity = 0.85
-          active_opacity = 0.9
+          blur {
+              enabled = ${builtins.toString cfg.config.general.blur}
+              new_optimizations = true
+          }
+          inactive_opacity = ${builtins.toString cfg.config.general.inactive_opacity}
+          active_opacity = ${builtins.toString cfg.config.general.active_opacity}
 
           drop_shadow = true
           shadow_range = 4
@@ -364,7 +379,7 @@ in
       layerrule = blur,rofi
 
       animations {
-        $(cfg.config.anims)
+        ${cfg.config.anims}
       }
 
       dwindle {
@@ -432,17 +447,6 @@ in
       windowrule = pin,^(ulauncher)$
       windowrule = noborder,^(ulauncher)$
       #########
-
-      ## opacity ##
-      windowrule=opacity 0.9 override 0.85 override,^(code-url-handler)$
-      windowrule=opacity 0.9,^(pcmanfm)$
-      windowrule=opacity 0.925,^(rofi)$
-      windowrule=opacity 0.925,^(lutris)$
-      windowrule=opacity 0.925,^(org.rncbc.qpwgraph)$
-      windowrule=opacity 0.925,^(file-roller)$
-      windowrule=opacity 0.925,^(filezilla)$
-      windowrule=opacity 0.925,^(Bless)$
-      #############
 
       ${if config.base.waybar.enable then "exec-once=sleep 4; waybar" else ""}
       ${if config.base.ulauncher.enable then "exec-once=fish -c 'while true;ulauncher --hide-window --no-window-shadow;end;'" else ""}

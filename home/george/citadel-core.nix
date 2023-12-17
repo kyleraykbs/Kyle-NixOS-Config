@@ -58,6 +58,9 @@
   base.hyprland.config.dwindle = {
     no_gaps_when_only = true;
   };
+  base.hyprland.config.general = {
+    blur = false;
+  };
   base.hyprland.enable = true;
   base.hyprland.startupApps = [
     {command="virt-manager"; workspace=5; time=1;}
@@ -175,4 +178,66 @@
       userEmail = "gewolf205140@yahoo.com";
     };
   };
+
+  base.neovim = {
+    enable = true;
+    plugins = {
+      nerdtree = {
+        enable = true;
+      };
+      startify = {
+        enable = true;
+      };
+      nerdcommenter = {
+        enable = true;
+        binds = {
+          defaultBinds = true;
+        };
+      };
+      ale = {
+        enable = true;
+      };
+      indentLine = {
+        enable = false;
+        config = {
+          char = "['┆', '│']";
+        };
+      };
+      whichKey = {
+        enable = true;
+      };
+      autoPairs = {
+        enable = true;
+      };
+      whiteSpace = {
+        enable = true;
+      };
+      airLine = {
+        enable = true;
+      };
+      easyMotion = {
+        enable = true;
+      };
+      fugitive = {
+        enable = true;
+      };
+      treeSitter = {
+        enable = true;
+      };
+      devicons = {
+        enable = true;
+      };
+      workSpace = {
+        enable = true;
+        config = {
+          autoSession = true;
+        };
+      };
+      autoSave = {
+        enable = true;
+        onStart = true;
+      };
+    };
+  };
+
 }

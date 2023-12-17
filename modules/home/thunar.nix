@@ -28,7 +28,7 @@ in
       enable = true;
       defaultApplications = {
         "inode/directory" = ["thunar.desktop"];
-        "application/zip" = ["engrampa.desktop"]; 
+        "application/zip" = ["engrampa.desktop"];
         # NOTE: Apps are symlinked from /etc/profiles/per-user/USERNAME/share/applications/
       };
     };
