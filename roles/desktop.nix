@@ -94,7 +94,8 @@
               apply_properties = {
                 ["audio.format"] = "S32LE",
                 ["audio.rate"] = "96000", -- for USB soundcards it should be twice your desired rate
-                ["api.alsa.period-size"] = 2048, -- defaults to 1024, tweak by trial-and-error
+                ["api.alsa.period-size"] = 256, -- defaults to 1024, tweak by trial-and-error
+                ["api.alsa.headroom"] = 8192,
                 -- ["api.alsa.disable-batch"] = true, -- generally, USB soundcards use the batch mode
               },
             },
@@ -102,6 +103,7 @@
         '';
        "pipewire/pipewire.conf.d/99-pipewire-highlatency.lua".text = ''
            context.properties = {
+               link.max-buffers = 64
                default.clock.allowed-rates = [ 96000 ]
                default.clock.rate = 96000
                default.clock.quantum = 8192
