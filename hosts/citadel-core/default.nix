@@ -22,6 +22,8 @@
   # services.xserver.displayManager.autoLogin.enable = true;
 
   base.virtualisation.enable = true;
+  base.virtualisation.hostcpus = "0-31";
+  base.virtualisation.virtcpus = "30-31";
 
   services = {
     syncthing = {

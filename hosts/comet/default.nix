@@ -10,7 +10,7 @@
   base.bluetooth.enable = true;
 
   networking.hostName = "comet";
-  
+
   base.user.kyle.enable = true;
   base.greetd = {
     enable = true;
@@ -24,6 +24,8 @@
   # services.xserver.displayManager.autoLogin.enable = true;
 
   base.virtualisation.enable = true;
+  base.virtualisation.hostcpus = "0-23";
+  base.virtualisation.virtcpus = "22-23";
 
   services = {
     syncthing = {

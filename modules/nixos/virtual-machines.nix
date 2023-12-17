@@ -26,6 +26,14 @@ rec {
       enable = mkEnableOption "amd virtualisation";
     };
 
+    hostcpus = mkOption {
+        type=types.string;
+    };
+
+    virtcpus = mkOption {
+        type=types.string;
+    };
+
     virtualmachines = mkOption {
       type = types.listOf types.attrs;
       default = [
@@ -94,6 +102,30 @@ rec {
       qemu
       looking-glass-client
     ];
+
+    systemd.services.libvirtd.preStart = ''
+        mkdir -p /var/lib/libvirt/hooks
+        chmod 755 /var/lib/libvirt/hooks
+
+        cp -f ${pkgs.writeScript "qemu" ''
+            #!/run/current-system/sw/bin/bash
+            if [[ $2 == "start" || $2 == "stopped" ]]
+            then
+              if [[ $2 == "start" ]]
+              then
+                systemctl set-property --runtime -- user.slice AllowedCPUs=${cfg.virtcpus}  
+                systemctl set-property --runtime -- system.slice AllowedCPUs=${cfg.virtcpus}  
+                systemctl set-property --runtime -- init.scope AllowedCPUs=${cfg.virtcpus}  
+              else
+                systemctl set-property --runtime -- user.slice AllowedCPUs=${cfg.hostcpus}  
+                systemctl set-property --runtime -- system.slice AllowedCPUs=${cfg.hostcpus}  
+                systemctl set-property --runtime -- init.scope AllowedCPUs=${cfg.hostcpus}  
+              fi
+            fi
+            ''} /var/lib/libvirt/hooks/qemu
+
+        chmod +x /var/lib/libvirt/hooks/qemu
+    '';
 
     boot = {
       kernelParams = mkMerge [
