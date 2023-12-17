@@ -10,7 +10,6 @@
 
   home.packages = with pkgs; [
     vlc
-    terminator
     unetbootin
     qogir-icon-theme
     quintom-cursor-theme
@@ -23,7 +22,6 @@
     libsForQt5.qtstyleplugins
     libsForQt5.kdenlive
     swaybg
-    pavucontrol
     helvum
     comma
     git-lfs

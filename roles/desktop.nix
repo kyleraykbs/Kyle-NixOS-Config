@@ -58,7 +58,6 @@
 
   # Enable sound with pipewire.
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -66,7 +65,59 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
+  environment.etc = let
+      json = pkgs.formats.json {};
+    in {
+      "pipewire/pipewire-pulse.d/92-high-latency.conf".source = json.generate "92-low-latency.conf" {
+        context.modules = [
+          {
+            name = "libpipewire-module-protocol-pulse";
+            args = {
+              pulse.min.req = "2048/48000";
+              pulse.default.req = "2048/48000";
+              pulse.max.req = "4096/48000";
+              pulse.min.quantum = "2048/48000";
+              pulse.max.quantum = "3082/48000";
+            };
+          }
+        ];
+        stream.properties = {
+          node.latency = "2048/48000";
+          resample.quality = 1;
+        };
+      };
+      "wireplumber/main.lua.d/99-alsa-highlatency.lua".text = ''
+          alsa_monitor.rules = {
+            {
+              matches = {{{ "node.name", "matches", "alsa_output.*" }}};
+              apply_properties = {
+                ["audio.format"] = "S32LE",
+                ["audio.rate"] = "48000", -- for USB soundcards it should be twice your desired rate
+                ["api.alsa.period-size"] = 16384, -- defaults to 1024, tweak by trial-and-error
+                -- ["api.alsa.disable-batch"] = true, -- generally, USB soundcards use the batch mode
+              },
+            },
+          }
+        '';
+       "pipewire/pipewire.conf.d/99-pipewire-highlatency.lua".text = ''
+           context.properties = {
+               default.clock.allowed-rates = [ 48000 ]
+               default.clock.rate = 48000
+               default.clock.min-quantum = 1024
+               default.clock.max-quantum = 8192
+               default.clock.quantum = 2048
+               default.clock.quantum-limit = 8192
+           }
+        '';
+    };
+  environment = {
+    sessionVariables = {
+      #LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
+      PULSE_LATENCY_MSEC="75";
+      PIPEWIRE_QUANTUM="2048/48000";
+      PIPEWIRE_LATENCY="2048/48000";
+    };
+  };
 
   services.xserver.enable = true;
   services.xserver.libinput.enable = true;
@@ -96,12 +147,7 @@
     python3
   ];
 
-  environment = {
-    sessionVariables = {
-      #LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
-      PULSE_LATENCY_MSEC="75";
-    };
-  };
+  
 
   boot.supportedFilesystems = [ "ntfs" "nfs" "btrfs" ];
   boot.kernelPackages = pkgs.linuxPackages_zen;
