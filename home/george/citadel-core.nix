@@ -64,7 +64,7 @@
   base.hyprland.enable = true;
   base.hyprland.startupApps = [
     {command="virt-manager"; workspace=5; time=1;}
-    {command="discord"; workspace=1; time=1;}
+    {command="discord"; workspace=1; time=4;}
   ];
   base.hyprland.extraConfig = ''
     workspace = 1, monitor:DP-2, default:true
