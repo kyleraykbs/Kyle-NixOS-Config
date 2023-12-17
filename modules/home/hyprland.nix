@@ -347,6 +347,10 @@ in
         force_zero_scaling = true
       }
 
+      misc {
+          vfr = false
+      }
+
       general {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
