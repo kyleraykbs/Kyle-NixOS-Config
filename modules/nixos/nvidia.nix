@@ -39,8 +39,6 @@ in
 
     services.xserver.videoDrivers = ["nvidia"];
 
-    programs.hyprland.enableNvidiaPatches = true;
-
     hardware.opengl.driSupport32Bit = true;
     environment.systemPackages = with pkgs; [
       nvidia-vaapi-driver
