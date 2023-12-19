@@ -107,7 +107,7 @@
       {adapter="HDMI-A-1"; resolution="1920x1080"; framerate=60; position="0x0";}
       {adapter="DP-1"; resolution="1920x1080"; framerate=240; position="1920x0";}
       {adapter="DVI-D-1"; resolution="1920x1080"; framerate=60; position="3840x0";}
-      {adapter="DVI-D-2"; resolution="1280x1024"; framerate=75; position="5760x0"; transform=1;}
+      {adapter="DVI-D-2"; resolution="1280x1024"; framerate=60; position="5760x0"; transform=1;}
     ];
     workspaces = {
       mouseBased = true;

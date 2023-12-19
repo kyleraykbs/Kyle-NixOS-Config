@@ -33,7 +33,7 @@ in
       general = {
         border_size = mkOption {
           type = types.int;
-          default = 3; 
+          default = 3;
         };
 
         border_color_1 = mkOption {
@@ -114,7 +114,7 @@ in
       performance = {
           vfr = mkOption {
             type = types.bool;
-            default = false;
+            default = true;
           };
       };
 
@@ -422,7 +422,6 @@ in
       debug {
         damage_tracking = ${builtins.toString (if cfg.config.debug.damage_tracking then 2 else 1)}
         disable_logs = ${builtins.toString (if cfg.config.debug.logging then "false" else "true")}
-        damage_blink = false
       }
 
       # Example windowrule v1
