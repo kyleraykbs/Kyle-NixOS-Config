@@ -78,7 +78,7 @@ in
 
         inactive_opacity = mkOption {
             type = types.float;
-            default = 0.85;
+            default = 0.9;
         };
     };
 
@@ -104,6 +104,10 @@ in
         damage_tracking = mkOption {
           type = types.bool;
           default = true;
+        };
+        logging = mkOption {
+          type = types.bool;
+          default = false;
         };
       };
 
@@ -417,6 +421,8 @@ in
 
       debug {
         damage_tracking = ${builtins.toString (if cfg.config.debug.damage_tracking then 2 else 1)}
+        disable_logs = ${builtins.toString (if cfg.config.debug.logging then "false" else "true")}
+        damage_blink = false
       }
 
       # Example windowrule v1
