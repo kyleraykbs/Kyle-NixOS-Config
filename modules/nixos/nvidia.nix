@@ -60,7 +60,7 @@ in
     (mkIf cfg.waylandFixups {
       LIBVA_DRIVER_NAME = "vdapu";
       WLR_NO_HARDWARE_CURSORS="1";
-      GBM_BACKEND = "nvidia-drm";
+      GBM_BACKEND = "nvidia";
       WLR_DRM_NO_ATOMIC = "1";
       __GLX_VENDOR_LIBRARY_NAME="nvidia";
       # XDG_SESSION_TYPE = "wayland";

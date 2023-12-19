@@ -9,6 +9,7 @@
 
 
   home.packages = with pkgs; [
+    pavucontrol
     vlc
     unetbootin
     qogir-icon-theme

@@ -110,7 +110,7 @@ in
       performance = {
           vfr = mkOption {
             type = types.bool;
-            default = true;
+            default = false;
           };
       };
 
@@ -274,7 +274,6 @@ in
       # source = ~/.config/hypr/myColors.conf
 
       # Some default env vars.
-      env = WLR_NO_HARDWARE_CURSORS,1
       env = NIXOS_OZONE_WL,1
       env = XCURSOR_SIZE,24
       env = _JAVA_AWT_WM_NONREPARENTING,1
@@ -366,6 +365,7 @@ in
           border_size = ${builtins.toString cfg.config.general.border_size}
           col.active_border = rgba(${cfg.config.general.border_color_1}ee) rgba(${cfg.config.general.border_color_2}ee) 45deg
           col.inactive_border = rgba(595959aa)
+          allow_tearing = true
 
           layout = ${cfg.config.general.layout}
       }
@@ -376,7 +376,6 @@ in
           rounding = ${builtins.toString cfg.config.general.rounding}
           blur {
               enabled = ${if cfg.config.general.blur then "true" else "false"}
-              new_optimizations = true
           }
           inactive_opacity = ${builtins.toString cfg.config.general.inactive_opacity}
           active_opacity = ${builtins.toString cfg.config.general.active_opacity}
