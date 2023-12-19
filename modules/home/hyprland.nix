@@ -369,7 +369,6 @@ in
           border_size = ${builtins.toString cfg.config.general.border_size}
           col.active_border = rgba(${cfg.config.general.border_color_1}ee) rgba(${cfg.config.general.border_color_2}ee) 45deg
           col.inactive_border = rgba(595959aa)
-          allow_tearing = true
 
           layout = ${cfg.config.general.layout}
       }
