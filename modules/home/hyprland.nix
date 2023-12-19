@@ -278,6 +278,7 @@ in
       # source = ~/.config/hypr/myColors.conf
 
       # Some default env vars.
+      env = WLR_DRM_NO_ATOMIC,1
       env = NIXOS_OZONE_WL,1
       env = XCURSOR_SIZE,24
       env = _JAVA_AWT_WM_NONREPARENTING,1

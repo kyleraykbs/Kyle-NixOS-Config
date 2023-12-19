@@ -16,5 +16,6 @@
     ./direnv.nix
     ./lutris.nix
     ./rofi.nix
+    ./sway.nix
   ];
 }

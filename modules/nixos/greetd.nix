@@ -35,7 +35,7 @@ in
       enable = true;
       settings = rec {
         initial_session = {
-          command = (if cfg.desktopenv == "hyprland" then "Hyprland" else "");
+          command = (if cfg.desktopenv == "hyprland" then "Hyprland" else if cfg.desktopenv == "sway" then "sway" else "");
           user = cfg.user;
         };
         default_session = initial_session;

@@ -104,10 +104,10 @@
   base.hyprland.enable = true;
   base.monitors = {
     monitors = [
-      {adapter="HDMI-A-1"; resolution="1920x1080"; framerate=60; position="0x0";}
-      {adapter="DP-1"; resolution="1920x1080"; framerate=240; position="1920x0";}
-      {adapter="DVI-D-1"; resolution="1920x1080"; framerate=60; position="3840x0";}
-      {adapter="DVI-D-2"; resolution="1280x1024"; framerate=60; position="5760x0"; transform=1;}
+      {adapter="DP-1"; resolution="1920x1080"; framerate=60; position="0x0";}
+      {adapter="DP-2"; resolution="maxrr"; framerate=200; position="1920x0";}
+      {adapter="HDMI-A-1"; resolution="1920x1080"; framerate=60; position="3840x0";}
+      {adapter="DVI-D-1"; resolution="1280x1024"; framerate=60; position="5760x0"; transform=1;}
     ];
     workspaces = {
       mouseBased = true;
@@ -116,12 +116,12 @@
   };
   base.hyprland.extraConfig = ''
     ## REGULAR
-    workspace = 1, monitor:DP-1, default:true
-    workspace = 2, monitor:DP-1, default:false
-    workspace = 3, monitor:DP-1, default:false
+    workspace = 1, monitor:DP-2, default:true
+    workspace = 2, monitor:DP-2, default:false
+    workspace = 3, monitor:DP-2, default:false
 
-    workspace = 4, monitor:DVI-D-1, default:true
-    workspace = 5, monitor:DVI-D-1, default:false
+    workspace = 4, monitor:HDMI-A-1, default:true
+    workspace = 5, monitor:HDMI-A-1, default:false
     workspace = 6, monitor:DVI-D-1, default:false
 
     workspace = 7, monitor:HDMI-A-1, default:true

@@ -14,5 +14,6 @@
     ./greetd.nix
     ./bluetooth.nix
     ./hardware/intel.nix
+    ./hardware/amd.nix
   ];
 }
