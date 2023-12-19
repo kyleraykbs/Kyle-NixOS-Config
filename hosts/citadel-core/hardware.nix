@@ -35,6 +35,7 @@
 	  vfioids = [
       "10de:2684"
       "10de:22ba"
+      "8086:7a60"
     ];
     intel.enable = true;
   };
