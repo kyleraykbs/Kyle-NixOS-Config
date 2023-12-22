@@ -73,17 +73,17 @@
           {
             name = "libpipewire-module-protocol-pulse";
             args = {
-              pulse.min.req = "4096/48000";
-              pulse.default.req = "8192/48000";
+              pulse.min.req = "2048/48000";
+              pulse.default.req = "4096/48000";
               pulse.max.req = "16384/48000";
-              pulse.min.quantum = "4096/48000";
-              pulse.quantum = "8192/48000";
+              pulse.min.quantum = "2048/48000";
+              pulse.quantum = "4096/48000";
               pulse.max.quantum = "16384/48000";
             };
           }
         ];
         stream.properties = {
-          node.latency = "8192/48000";
+          node.latency = "8192/48000"; # effects garbledness
           resample.quality = 1;
         };
       };
@@ -103,7 +103,7 @@
               apply_properties = {
                 ["audio.format"] = "S32LE",
                 ["audio.rate"] = "96000", -- for USB soundcards it should be twice your desired rate
-                ["api.alsa.period-size"] = 1024, -- defaults to 1024, tweak by trial-and-error
+                ["api.alsa.period-size"] = 312, -- defaults to 1024, tweak by trial-and-error
                 ["api.alsa.headroom"] = 8192,
                 ["api.alsa.soft-mixer"] = true,
                 ["session.suspend-timeout-seconds"] = 0,
@@ -127,9 +127,8 @@
     sessionVariables = {
       #LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
       PULSE_LATENCY_MSEC="100";
-      PIPEWIRE_LATENCY="1024/96000";
-      PIPEWIRE_QUANTUM="196/96000";
       PIPEWIRE_RATE="96000";
+      PIPEWIRE_QUANTUM="128/96000";
     };
   };
 
