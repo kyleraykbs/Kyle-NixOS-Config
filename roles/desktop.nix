@@ -68,7 +68,7 @@
   environment.etc = let
       json = pkgs.formats.json {};
     in {
-      "pipewire/pipewire-pulse.d/92-high-latency.conf".source = json.generate "92-low-latency.conf" {
+      "pipewire/pipewire-pulse.d/99-high-latency.conf".source = json.generate "99-high-latency.conf" {
         context.modules = [
           {
             name = "libpipewire-module-protocol-pulse";
@@ -83,19 +83,30 @@
           }
         ];
         stream.properties = {
-          node.latency = "96000/48000";
+          node.latency = "8192/48000";
           resample.quality = 1;
         };
       };
       "wireplumber/main.lua.d/99-alsa-highlatency.lua".text = ''
           alsa_monitor.rules = {
             {
-              matches = {{{ "node.name", "matches", "alsa_output.*" }}};
+              matches = {
+                {
+                  -- Matches all sources.
+                  { "node.name", "matches", "alsa_input.*" },
+                },
+                {
+                  -- Matches all sinks.
+                  { "node.name", "matches", "alsa_output.*" },
+                },
+              },
               apply_properties = {
                 ["audio.format"] = "S32LE",
                 ["audio.rate"] = "96000", -- for USB soundcards it should be twice your desired rate
-                ["api.alsa.period-size"] = 256, -- defaults to 1024, tweak by trial-and-error
+                ["api.alsa.period-size"] = 1024, -- defaults to 1024, tweak by trial-and-error
                 ["api.alsa.headroom"] = 8192,
+                ["api.alsa.soft-mixer"] = true,
+                ["session.suspend-timeout-seconds"] = 0,
                 -- ["api.alsa.disable-batch"] = true, -- generally, USB soundcards use the batch mode
               },
             },
@@ -104,7 +115,7 @@
        "pipewire/pipewire.conf.d/99-pipewire-highlatency.lua".text = ''
            context.properties = {
                link.max-buffers = 64
-               default.clock.allowed-rates = [ 96000 ]
+               default.clock.allowed-rates = [ 44100 48000 96000 ]
                default.clock.rate = 96000
                default.clock.quantum = 8192
                default.clock.min-quantum = 4096
@@ -116,6 +127,9 @@
     sessionVariables = {
       #LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
       PULSE_LATENCY_MSEC="100";
+      PIPEWIRE_LATENCY="4096/96000";
+      PIPEWIRE_QUANTUM="8192/96000";
+      PIPEWIRE_RATE="96000";
     };
   };
 
