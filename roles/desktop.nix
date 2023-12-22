@@ -107,7 +107,7 @@
                 ["api.alsa.headroom"] = 8192,
                 ["api.alsa.soft-mixer"] = true,
                 ["session.suspend-timeout-seconds"] = 0,
-                -- ["api.alsa.disable-batch"] = true, -- generally, USB soundcards use the batch mode
+                ["api.alsa.disable-batch"] = true, -- generally, USB soundcards use the batch mode
               },
             },
           }
@@ -115,7 +115,7 @@
        "pipewire/pipewire.conf.d/99-pipewire-highlatency.lua".text = ''
            context.properties = {
                link.max-buffers = 64
-               default.clock.allowed-rates = [ 44100 48000 96000 ]
+               default.clock.allowed-rates = [ 96000 ]
                default.clock.rate = 96000
                default.clock.quantum = 8192
                default.clock.min-quantum = 4096
@@ -127,8 +127,8 @@
     sessionVariables = {
       #LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
       PULSE_LATENCY_MSEC="100";
-      PIPEWIRE_LATENCY="4096/96000";
-      PIPEWIRE_QUANTUM="8192/96000";
+      PIPEWIRE_LATENCY="1024/96000";
+      PIPEWIRE_QUANTUM="196/96000";
       PIPEWIRE_RATE="96000";
     };
   };
