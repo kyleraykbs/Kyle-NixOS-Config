@@ -14,7 +14,7 @@ in
 
   config = mkIf cfg.enable {
     stylix = {
-      image = config.base.wallpaper;
+      image = config.shared.style.wallpaper;
       polarity = "dark";
       targets.gtk.enable = true;
       targets.gtk.extraCss = ''

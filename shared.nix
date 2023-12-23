@@ -1,5 +1,25 @@
+{lib, ...}: 
+let
+  inherit (lib)
+    mkOption
+    types
+    ;
+in
 {
-  style = rec {
-    wallpaper = ./wallpaper/leaves.jpg;
+  options.shared = {
+    style = {
+        wallpaper = mkOption {
+            type = types.path;
+            default = ./wallpaper/combin.png;
+        };
+    };
+    system = {
+        users = {
+            perms = mkOption {
+                type = types.listOf types.str;
+                default = [ "networkmanager" "wheel" "libvirtd" "dialout" "tty" "adbusers" "docker" ];
+            };
+        };
+    };
   };
 }

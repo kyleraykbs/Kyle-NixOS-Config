@@ -1,13 +1,6 @@
 {config, pkgs, inputs, ...}: {
   home.stateVersion = "23.05";
 
-  gtk = {
-    enable = true;
-    iconTheme.name = "Qogir";
-    cursorTheme.name = "Qogir";
-  };
-
-
   home.packages = with pkgs; [
     pavucontrol
     vlc

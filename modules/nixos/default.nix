@@ -1,6 +1,5 @@
 {
   imports = [
-    ./base.nix
     ./hyprland.nix
     ./home-manager.nix
     ./users/kyle.nix
@@ -15,5 +14,6 @@
     ./bluetooth.nix
     ./hardware/intel.nix
     ./hardware/amd.nix
+    ../../shared.nix
   ];
 }

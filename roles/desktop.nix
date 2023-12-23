@@ -12,7 +12,7 @@
 
   hardware.opentabletdriver.enable = true;
 
-  stylix.image = config.base.wallpaper;
+  stylix.image = config.shared.style.wallpaper;
   stylix.polarity = "dark";
   stylix.autoEnable = lib.mkDefault false;
 
@@ -143,6 +143,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    pulseaudio
     neofetch
     github-desktop
     git

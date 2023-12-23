@@ -8,7 +8,6 @@
     ./pcmanfm.nix
     ./thunar.nix
     ./discord.nix
-    ./base.nix
     ./neovim.nix
     ./fish.nix
     ./waybar.nix
@@ -17,5 +16,6 @@
     ./lutris.nix
     ./rofi.nix
     ./sway.nix
+    ../../shared.nix
   ];
 }

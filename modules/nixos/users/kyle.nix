@@ -36,10 +36,10 @@ in
       users.kyle = {
         isNormalUser = true;
         description = "Kyle Kubis";
-        extraGroups = [ "networkmanager" "wheel" "libvirtd" "dialout" "tty" "adbusers" "docker" ];
+        extraGroups = config.shared.system.users.perms;
       };
     };
-    
+
     security.sudo.extraRules= [
       { users = [ "kyle" ];
           commands = [

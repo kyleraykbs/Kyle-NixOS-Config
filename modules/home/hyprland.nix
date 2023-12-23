@@ -48,7 +48,7 @@ in
 
         gaps_in = mkOption {
           type = types.int;
-          default = 5;
+          default = 10;
         };
 
         gaps_out = mkOption {
@@ -244,6 +244,8 @@ in
       grim
       wl-clip-persist
       swaybg
+      qogir-icon-theme
+      quintom-cursor-theme
       (mkIf cfg.config.screenshare.enable jellyfin-ffmpeg)
       (mkIf cfg.config.screenshare.enable killall)
       (mkIf cfg.config.screenshare.enable wf-recorder)
@@ -260,6 +262,11 @@ in
       wlrobs
       obs-nvfbc
     ];
+    gtk = {
+        enable = true;
+        iconTheme.name = "Qogir";
+        cursorTheme.name = "Qogir";
+      };
     home.file.".config/hypr/hyprland.conf".text = ''
       # This is an example Hyprland config file.
       #
@@ -385,8 +392,9 @@ in
           active_opacity = ${builtins.toString cfg.config.general.active_opacity}
 
           drop_shadow = true
-          shadow_range = 4
-          shadow_render_power = 3
+          shadow_range = 2
+          shadow_render_power = 1
+          shadow_offset = 10 10
           col.shadow = rgba(1a1a1aee)
       }
 
@@ -465,7 +473,7 @@ in
 
       ${if config.base.waybar.enable then "exec-once=sleep 4; waybar" else ""}
       ${if config.base.ulauncher.enable then "exec-once=fish -c 'while true;ulauncher --hide-window --no-window-shadow;end;'" else ""}
-      exec = killall -9 swaybg; swaybg --mode fill -i "${config.base.wallpaper}"
+      exec = killall -9 swaybg; swaybg --mode fill -i "${config.shared.style.wallpaper}"
       exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       exec-once = ${pkgs.libsForQt5.kdeconnect-kde}/libexec/kdeconnectd
       exec-once = hyprctl dispatch workspace 1
