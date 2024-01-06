@@ -99,9 +99,9 @@
     sessionVariables = {
       #LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
       PULSE_LATENCY_MSEC="100";
-      PIPEWIRE_RATE="48000";
-      PIPEWIRE_QUANTUM="128/48000";
-      PIPEWIRE_LATENCY="0/48000";
+      PIPEWIRE_RATE="19200";
+      PIPEWIRE_QUANTUM="4096/19200";
+      PIPEWIRE_LATENCY="0/19200";
     };
   };
 
