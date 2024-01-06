@@ -8,6 +8,8 @@
 
   networking.hostName = "citadel-core";
 
+  time.timeZone = "America/New_York";
+
   base.user.george.enable = true;
   base.greetd = {
     enable = true;

@@ -38,7 +38,7 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "America/Los_Angeles";
+  time.timeZone = lib.mkDefault "America/Los_Angeles";
 
   # Select internationalisation properties.
   i18n = rec {
