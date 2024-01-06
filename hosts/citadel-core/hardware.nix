@@ -8,7 +8,7 @@
     useDHCP = false;
 
     interfaces = {
-      enp3s0.useDHCP = true;
+      enp2s0.useDHCP = true;
       br0.useDHCP = true;
     };
 
