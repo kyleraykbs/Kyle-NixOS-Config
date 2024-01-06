@@ -31,12 +31,12 @@
 
   base.intel.enable = true;
 
+  base.virtualisation.cpuarch = "intel";
   base.virtualisation = {
 	  vfioids = [
       "10de:2684"
       "10de:22ba"
     ];
-    intel.enable = true;
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

@@ -18,13 +18,9 @@ rec {
   options.base.virtualisation = {
     enable = mkEnableOption "virtualisation";
 
-    intel = {
-      enable = mkEnableOption "intel virtualisation";
-    };
+    cpuarch = mkOption { type = types.enum [ "intel" "amd" ]; };
 
-    amd = {
-      enable = mkEnableOption "amd virtualisation";
-    };
+    acspatch = mkEnableOption "acspatch";
 
     hostcpus = mkOption {
         type=types.string;
@@ -103,45 +99,40 @@ rec {
       looking-glass-client
     ];
 
-    systemd.services.libvirtd.preStart = ''
-        mkdir -p /var/lib/libvirt/hooks
-        chmod 755 /var/lib/libvirt/hooks
-
-        cp -f ${pkgs.writeScript "qemu" ''
-            #!/run/current-system/sw/bin/bash
-            if [[ $2 == "start" || $2 == "stopped" ]]
-            then
-              if [[ $2 == "start" ]]
-              then
-                systemctl set-property --runtime -- user.slice AllowedCPUs=${cfg.virtcpus}  
-                systemctl set-property --runtime -- system.slice AllowedCPUs=${cfg.virtcpus}  
-                systemctl set-property --runtime -- init.scope AllowedCPUs=${cfg.virtcpus}  
-              else
-                systemctl set-property --runtime -- user.slice AllowedCPUs=${cfg.hostcpus}  
-                systemctl set-property --runtime -- system.slice AllowedCPUs=${cfg.hostcpus}  
-                systemctl set-property --runtime -- init.scope AllowedCPUs=${cfg.hostcpus}  
-              fi
-            fi
-            ''} /var/lib/libvirt/hooks/qemu
-
-        chmod +x /var/lib/libvirt/hooks/qemu
-    '';
+    systemd.tmpfiles.rules =
+    let
+      myScript = pkgs.writeScript "qemu-hook.sh" ''
+        #!/run/current-system/sw/bin/bash
+        if [[ $2 == "start" || $2 == "stopped" ]]
+        then
+          if [[ $2 == "start" ]]
+          then
+            systemctl set-property --runtime -- user.slice AllowedCPUs=${cfg.virtcpus}
+            systemctl set-property --runtime -- system.slice AllowedCPUs=${cfg.virtcpus}
+            systemctl set-property --runtime -- init.scope AllowedCPUs=${cfg.virtcpus}
+          else
+            systemctl set-property --runtime -- user.slice AllowedCPUs=${cfg.hostcpus}
+            systemctl set-property --runtime -- system.slice AllowedCPUs=${cfg.hostcpus}
+            systemctl set-property --runtime -- init.scope AllowedCPUs=${cfg.hostcpus}
+          fi
+        fi
+      '';
+    in
+    [ "L+ /var/lib/libvirt/hooks/qemu - - - - ${myScript}" ];
 
     boot = {
       kernelParams = mkMerge [
         [
           "iommu=pt"
-          "pcie_acs_override=downstream,multifunction" 
-          "kvm.ignore_msrs=1" 
+          (mkIf cfg.acspatch "pcie_acs_override=downstream,multifunction")
+          "kvm.ignore_msrs=1"
           "vfio-pci.ids=${builtins.concatStringsSep "," cfg.vfioids}"
+          "${cfg.cpuarch}_iommu=on"
         ]
-        (mkIf cfg.amd.enable ["amd_iommu=on"]) 
-        (mkIf cfg.intel.enable ["intel_iommu=on"])
       ];
 
-      kernelModules = mkMerge [ 
-        (mkIf cfg.amd.enable ["kvm-amd"]) 
-        (mkIf cfg.intel.enable ["kvm-intel"]) 
+      kernelModules = [ 
+        "kvm-${cfg.cpuarch}"
       ];
     };
   };

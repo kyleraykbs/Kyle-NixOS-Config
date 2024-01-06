@@ -97,10 +97,10 @@
   base.hyprland.enable = true;
   base.monitors = {
     monitors = [
-      {adapter="DP-1"; resolution="1920x1080"; framerate=60; position="0x0";}
-      {adapter="DP-2"; resolution="maxrr"; framerate=200; position="1920x0";}
-      {adapter="HDMI-A-1"; resolution="1920x1080"; framerate=60; position="3840x0";}
-      {adapter="DVI-D-1"; resolution="1280x1024"; framerate=60; position="5760x0"; transform=1;}
+      {adapter="HDMI-A-1"; resolution="1920x1080"; framerate=60; position="0x0";}
+      {adapter="DP-1"; resolution="1920x1080"; framerate=60; position="1920x0";}
+      {adapter="DP-2"; resolution="1920x1080"; framerate=120; position="3840x0";}
+      {adapter="DVI-D-1"; resolution="1920x1080"; framerate=60; position="5760x0";}
     ];
     workspaces = {
       mouseBased = true;
