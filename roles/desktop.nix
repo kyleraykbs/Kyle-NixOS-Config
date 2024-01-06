@@ -95,7 +95,15 @@
     python3
   ];
 
-  
+  environment = {
+    sessionVariables = {
+      #LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
+      PULSE_LATENCY_MSEC="100";
+      PIPEWIRE_RATE="48000";
+      PIPEWIRE_QUANTUM="128/48000";
+      PIPEWIRE_LATENCY="0/48000";
+    };
+  };
 
   boot.supportedFilesystems = [ "ntfs" "nfs" "btrfs" ];
   boot.kernelPackages = pkgs.linuxPackages_zen;
