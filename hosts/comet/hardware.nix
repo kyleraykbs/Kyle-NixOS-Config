@@ -14,6 +14,9 @@
     };
   };
 
+  base.nvidia.enable = true;
+  base.bluetooth.enable = true;
+
   base.virtualisation.enable = true;
   base.virtualisation.hostcpus = "0-23";
   base.virtualisation.virtcpus = "22-23";

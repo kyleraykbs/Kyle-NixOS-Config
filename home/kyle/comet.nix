@@ -22,6 +22,7 @@
     obsidian
     signal-desktop
     fritzing
+    xvfb-run
     libreoffice
   ];
 

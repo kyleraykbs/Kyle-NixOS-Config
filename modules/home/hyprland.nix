@@ -246,7 +246,7 @@ in
       swaybg
       qogir-icon-theme
       quintom-cursor-theme
-      (mkIf cfg.config.screenshare.enable jellyfin-ffmpeg)
+      (mkIf cfg.config.screenshare.enable ffmpeg-full)
       (mkIf cfg.config.screenshare.enable killall)
       (mkIf cfg.config.screenshare.enable wf-recorder)
       (mkIf cfg.config.ocr.enable tesseract)

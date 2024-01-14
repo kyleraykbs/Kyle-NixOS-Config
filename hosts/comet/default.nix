@@ -4,10 +4,7 @@
 
     ./hardware.nix
     ./storage.nix
-  ];
-
-  base.nvidia.enable = true;
-  base.bluetooth.enable = true;
+  ]; 
 
   networking.hostName = "comet";
 

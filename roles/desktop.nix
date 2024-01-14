@@ -111,6 +111,13 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
+  boot.extraModprobeConfig = ''
+      options v4l2loopback exclusive_caps=1 video_nr=9 card_label=VirtualVideoDevice
+    '';
+  boot.initrd.kernelModules = [
+    "vfio"
+    "vfio_pci"
+  ];
 
   programs.adb.enable = true;
 
