@@ -20,6 +20,7 @@
     libsForQt5.kdenlive
     swaybg
     pavucontrol
+    easyeffects
     helvum
     comma
     git-lfs
