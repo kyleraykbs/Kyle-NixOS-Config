@@ -10,7 +10,7 @@ in
     style = {
         wallpaper = mkOption {
             type = types.path;
-            default = ./wallpaper/combin.png;
+            default = ./wallpaper/sussy.png;
         };
     };
     system = {
