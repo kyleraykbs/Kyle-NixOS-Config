@@ -31,6 +31,7 @@
   base.kdeconnect.enable = true;
   base.discord.enable = true;
   base.fish.enable = true;
+  base.vscode.enable = true;
 
   base.neovim = {
     enable = true;
@@ -151,10 +152,6 @@
 
   programs = {
     firefox = {
-      enable = true;
-    };
-
-    vscode = {
       enable = true;
     };
 

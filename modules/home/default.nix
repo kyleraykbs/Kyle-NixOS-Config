@@ -16,6 +16,7 @@
     ./lutris.nix
     ./rofi.nix
     ./sway.nix
+    ./vscode.nix
     ../../shared.nix
   ];
 }
