@@ -99,10 +99,21 @@
     sessionVariables = {
       #LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
       PULSE_LATENCY_MSEC="50";
-      PIPEWIRE_RATE="19200";
-      PIPEWIRE_QUANTUM="128/19200";
-      PIPEWIRE_LATENCY="0/19200";
+      PIPEWIRE_RATE="48000";
+      PIPEWIRE_QUANTUM="128/48000";
+      PIPEWIRE_LATENCY="0/48000";
     };
+  };
+
+  environment.etc = {
+    "pipewire/pipewire.conf.d/92-low-latency.conf".text = ''
+      context.properties = {
+        default.clock.rate = 48000
+        default.clock.quantum = 512
+        default.clock.min-quantum = 512
+        default.clock.max-quantum = 512
+      }
+    '';
   };
 
   boot.supportedFilesystems = [ "ntfs" "nfs" "btrfs" ];
