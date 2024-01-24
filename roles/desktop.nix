@@ -93,6 +93,7 @@
     podman
     i2c-tools
     python3
+    easyeffects
   ];
 
   environment = {

@@ -236,6 +236,7 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      easyeffects
       wl-clipboard
       vaapiVdpau
       slurp
@@ -480,6 +481,7 @@ in
       exec-once = hyprctl setcursor Qogir 24
       exec-once = xdg-user-dirs-update
       exec-once = wl-clip-persist --clipboard regular
+      exec-once = easyeffects --gapplication-service
       ${cfg.extraConfig}
 
       exec-once=${

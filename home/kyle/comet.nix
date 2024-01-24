@@ -24,6 +24,7 @@
     fritzing
     xvfb-run
     libreoffice
+    upnp-router-control
   ];
 
   base.thunar.enable = true;
