@@ -78,6 +78,7 @@
 
   environment.systemPackages = with pkgs; [
     pulseaudio
+    lazygit
     neofetch
     github-desktop
     git
