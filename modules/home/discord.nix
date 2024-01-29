@@ -14,10 +14,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
+    home.packages = with pkgs.stable; [
       (discord.override {
-        withOpenASAR = false;
-        withVencord = false;
+        withOpenASAR = true;
+        withVencord = true;
         withTTS = false;
       })
     ];

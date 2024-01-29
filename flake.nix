@@ -4,7 +4,9 @@
   inputs = {
     home-manager.url = "github:nix-community/home-manager/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
     stylix.url = "github:danth/stylix";
+    nur.url = "github:nix-community/NUR";
   };
 
   outputs = inputs:
@@ -15,11 +17,17 @@
 
       mkNixos = system: config: nixpkgs.lib.nixosSystem {
         inherit specialArgs system;
-        modules = [ ./modules/nixos config ];
+        modules = [ 
+        ./overlays.nix
+        ./modules/nixos config
+        ];
       };
 
       mkHome = config: home-manager.lib.homeManagerConfiguration {
-        pkgs = fpkgs;
+        pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
         extraSpecialArgs = specialArgs;
         modules = [ ./overlays.nix ./modules/home config ];
       };
