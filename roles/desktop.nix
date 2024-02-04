@@ -77,6 +77,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    btop
     pulseaudio
     lazygit
     neofetch

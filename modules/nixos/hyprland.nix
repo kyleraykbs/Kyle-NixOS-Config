@@ -20,7 +20,7 @@ in
 
   config = mkIf cfg.enable {
     base.nvidia.waylandFixups = mkDefault true;
-    
+
     programs.hyprland = {
       enable = true;
 
@@ -36,7 +36,7 @@ in
       enable = true;
       extraPortals = with pkgs; [
         # xdg-desktop-portal-wlr
-        # xdg-desktop-portal-kde
+        xdg-desktop-portal-kde
         xdg-desktop-portal-hyprland
       ];
     };

@@ -28,10 +28,12 @@
   ];
 
   base.thunar.enable = true;
+  base.feh.enable = true;
   base.kdeconnect.enable = true;
   base.discord.enable = true;
   base.fish.enable = true;
   base.vscode.enable = true;
+  base.vlc.enable = true;
 
   base.neovim = {
     enable = true;

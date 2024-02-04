@@ -1,6 +1,7 @@
 {config, lib, pkgs, ...}: 
 {
   imports = [
+    ./feh.nix
     ./neofetch
     ./hardware/monitors.nix
     ./stylix
@@ -18,6 +19,7 @@
     ./rofi.nix
     ./sway.nix
     ./vscode.nix
+    ./vlc.nix
     ../../shared.nix
   ];
 }

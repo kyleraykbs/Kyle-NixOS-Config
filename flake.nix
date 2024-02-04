@@ -2,10 +2,16 @@
   description = "NixOS configuration";
 
   inputs = {
-    home-manager.url = "github:nix-community/home-manager/master";
+    stylix = {
+        url = "github:danth/stylix";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager = {
+        url = "github:nix-community/home-manager/master";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
-    stylix.url = "github:danth/stylix";
     nur.url = "github:nix-community/NUR";
   };
 
@@ -17,7 +23,7 @@
 
       mkNixos = system: config: nixpkgs.lib.nixosSystem {
         inherit specialArgs system;
-        modules = [ 
+        modules = [
         ./overlays.nix
         ./modules/nixos config
         ];

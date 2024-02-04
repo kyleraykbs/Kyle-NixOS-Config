@@ -20,6 +20,7 @@ in
         withVencord = true;
         withTTS = false;
       })
+      vesktop
     ];
   };
 }

@@ -447,12 +447,15 @@ in
 
       ${if cfg.config.ocr.enable then ''bind = ${cfg.config.ocr.keybind},exec,hyprctl dispatch toggleopaque; slurp | grim -g - ocr.png; hyprctl dispatch toggleopaque; tesseract ocr.png ocr -l eng --oem 1; cat ocr.txt | wl-copy; rm ocr.txt ocr.png'' else ""}
 
-      ### kitty
       windowrule = animation popin,^(kitty)$ # sets the animation style for kitty
       windowrule = float,^(kitty)$
       windowrule = size 50% 50%,^(kitty)$
       windowrule = move cursor -50% -50%,^(kitty)$ # moves kitty to the center of the cursor
-      #########
+
+      windowrule = float,^(feh)$
+      windowrule = move cursor -50% -50%,^(feh)$ 
+      windowrule = float,^(vlc)$
+      windowrule = move cursor -50% -50%,^(vlc)$ 
 
       ${(if cfg.config.screenshare.enable then ''
       ### ffplay
