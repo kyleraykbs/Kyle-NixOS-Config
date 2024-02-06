@@ -92,7 +92,6 @@
           bind = $mainMod, X, killactive,
           bind = $mainMod, M, exit,
           bind = $mainMod, SPACE, togglefloating,
-          bind = $mainMod, R, exec, rofi -show drun -theme .config/rofi/main.rasi 
           bind = $mainMod, F, fullscreen, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle
 

@@ -126,7 +126,7 @@
     v4l2loopback
   ];
   boot.extraModprobeConfig = ''
-      options v4l2loopback exclusive_caps=1 video_nr=9 card_label=VirtualVideoDevice
+      options v4l2loopback exclusive_caps=1 video_nr=6,7,8,9 card_label=VirtualVideoDevice
     '';
   boot.initrd.kernelModules = [
     "vfio"

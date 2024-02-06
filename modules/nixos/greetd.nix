@@ -35,7 +35,13 @@ in
       enable = true;
       settings = rec {
         initial_session = {
-          command = (if cfg.desktopenv == "hyprland" then "Hyprland" else if cfg.desktopenv == "sway" then "sway" else "");
+          command = let
+            runScript = pkgs.writeScript "greetd.bash" ''
+            #!${pkgs.bash}/bin/bash
+              source /etc/profiles/per-user/${cfg.user}/etc/profile.d/hm-session-vars.sh;
+              ${(if cfg.desktopenv == "hyprland" then "Hyprland" else if cfg.desktopenv == "sway" then "sway" else "")}
+            '';
+          in "${runScript}";
           user = cfg.user;
         };
         default_session = initial_session;

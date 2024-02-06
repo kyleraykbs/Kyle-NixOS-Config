@@ -67,6 +67,14 @@ in
       qt6ct
     ];
 
+    home.sessionVariables = {
+      QT_QPA_PLATFORMTHEME = "qt6ct";
+    };
+
+    qt = {
+      enable = true;
+    };
+
     home.file = {
       ".config/qt5ct/colors/oomox-current.conf".source = config.lib.stylix.colors {
             template = builtins.readFile ./mustache/qt-oomox.conf.mustache;

@@ -1,4 +1,13 @@
-{config, pkgs, inputs, ...}: {
+{config, pkgs, inputs, lib, ...}: 
+let
+  inherit (lib)
+      mkEnableOption
+      mkIf
+      mkOption
+      types
+      ;
+in
+{
   home.stateVersion = "23.05";
 
   home.packages = with pkgs; [
@@ -10,6 +19,7 @@
     authenticator
     clipman
     gimp
+    krita
     firefox
     github-desktop
     keepassxc
@@ -102,9 +112,9 @@
   base.hyprland.enable = true;
   base.monitors = {
     monitors = [
-      {adapter="HDMI-A-1"; resolution="1920x1080"; framerate=60; position="0x0";}
+      #{adapter="HDMI-A-1"; resolution="1920x1080"; framerate=60; position="0x0";}
       {adapter="DP-1"; resolution="1920x1080"; framerate=60; position="1920x0";}
-      {adapter="DP-2"; resolution="1920x1080"; framerate=120; position="3840x0";}
+      {adapter="HDMI-A-1"; resolution="1920x1080"; framerate=120; position="3840x0";}
       {adapter="DVI-D-1"; resolution="1920x1080"; framerate=60; position="5760x0";}
     ];
     workspaces = {
@@ -125,8 +135,6 @@
     workspace = 7, monitor:HDMI-A-1, default:true
     workspace = 8, monitor:HDMI-A-1, default:false
     workspace = 9, monitor:HDMI-A-1, default:false
-
-    bind = $mainMod, ESCAPE, exec, kitty sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"
 
     bind = , code:90, workspace, 1
     bind = , code:87, workspace, 1

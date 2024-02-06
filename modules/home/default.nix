@@ -20,6 +20,7 @@
     ./sway.nix
     ./vscode.nix
     ./vlc.nix
+    ./cursor.nix
     ../../shared.nix
   ];
 }

@@ -16,7 +16,7 @@ in
     enable = mkEnableOption "Hyprland Home";
 
     extraConfig = mkOption {
-      type = types.str;
+      type = types.lines;
       default = "";
     };
 
@@ -246,13 +246,13 @@ in
       wl-clip-persist
       swaybg
       qogir-icon-theme
-      quintom-cursor-theme
       (mkIf cfg.config.screenshare.enable ffmpeg-full)
       (mkIf cfg.config.screenshare.enable killall)
       (mkIf cfg.config.screenshare.enable wf-recorder)
       (mkIf cfg.config.ocr.enable tesseract)
     ];
 
+    base.cursor.enable = true;
     base.rofi.enable = lib.mkDefault true;
 
     # set some nice defaults for apps that pair well
@@ -263,11 +263,6 @@ in
       wlrobs
       obs-nvfbc
     ];
-    gtk = {
-        enable = true;
-        iconTheme.name = "Qogir";
-        cursorTheme.name = "Qogir";
-      };
     home.file.".config/hypr/hyprland.conf".text = ''
       # This is an example Hyprland config file.
       #
@@ -288,9 +283,7 @@ in
       # Some default env vars.
       env = WLR_DRM_NO_ATOMIC,1
       env = NIXOS_OZONE_WL,1
-      env = XCURSOR_SIZE,24
       env = _JAVA_AWT_WM_NONREPARENTING,1
-      env = QT_QPA_PLATFORMTHEME,qt5ct
       env = LIBSEAT_BACKEND,logind
       env = XDG_SESSION_TYPE,wayland
       env = XDG_CURRENT_DESKTOP,Hyprland
@@ -439,6 +432,7 @@ in
       # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
       ${cfg.config.binds}
+      bind = $mainMod, ESCAPE, exec, kitty sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"
 
       ${(if cfg.config.screenshare.enable then ''bind = ${cfg.config.screenshare.keybind},exec,killall -9 wf-recorder; wf-recorder -g "$(slurp -o)" --muxer=v4l2 --codec=rawvideo --file=/dev/video9 & sleep 1; ffplay /dev/video9'' else "")}
       ${(if cfg.config.screenshare.enable then ''bind = ${cfg.config.screenshare.stopkeybind},exec,killall -9 wf-recorder; killall -9 ffplay'' else "")}
@@ -455,7 +449,7 @@ in
       windowrule = float,^(feh)$
       windowrule = move cursor -50% -50%,^(feh)$ 
       windowrule = float,^(vlc)$
-      windowrule = move cursor -50% -50%,^(vlc)$ 
+      windowrule = move cursor -50% -50%,^(vlc)$
 
       ${(if cfg.config.screenshare.enable then ''
       ### ffplay
@@ -481,7 +475,6 @@ in
       exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       exec-once = ${pkgs.libsForQt5.kdeconnect-kde}/libexec/kdeconnectd
       exec-once = hyprctl dispatch workspace 1
-      exec-once = hyprctl setcursor Qogir 24
       exec-once = xdg-user-dirs-update
       exec-once = wl-clip-persist --clipboard regular
       exec-once = easyeffects --gapplication-service
