@@ -296,27 +296,45 @@ in
       env = MOZ_ENABLE_WAYLAND,1
 
       ${let
-	  lines = builtins.concatStringsSep "\n" (map (x:
-	    let
-	      resolutionPart = if x ? resolution then
-	        if x.resolution == "default" then
-	          "preferred"
-	        else if x.resolution == "maxres" then
-	          "highres"
-	        else if x.resolution == "maxrr" then
-	          "highrr"
-	        else
-	          "${x.resolution}@${if x ? framerate then builtins.toString x.framerate else "60"}"
-	      else
-	        "preferred";
-	      positionPart = if x ? position then x.position else "auto";
-	      scalePart = if x ? scale then builtins.toString x.scale else "1";
-	    in
-	    "monitor=${x.adapter},${resolutionPart},${positionPart},${scalePart}${if x ? transform then ",transform,${builtins.toString x.transform}" else ""}${if x ? mirroring then ",mirror,${x.mirroring}" else ""}"
-	  ) config.base.monitors.monitors);
-	in
-	lines
-	}
+        lines = builtins.concatStringsSep "\n" (map (x:
+          let
+            resolutionPart = if x ? resolution then
+              if x.resolution == "default" then
+                "preferred"
+              else if x.resolution == "maxres" then
+                "highres"
+              else if x.resolution == "maxrr" then
+                "highrr"
+              else
+                "${x.resolution}@${if x ? framerate then builtins.toString x.framerate else "60"}"
+            else
+              "preferred";
+            positionPart = if x ? position then x.position else "auto";
+            scalePart = if x ? scale then builtins.toString x.scale else "1";
+          in
+          "monitor=${x.adapter},${resolutionPart},${positionPart},${scalePart}${if x ? transform then ",transform,${builtins.toString x.transform}" else ""}${if x ? mirroring then ",mirror,${x.mirroring}" else ""}"
+        ) config.base.monitors.monitors);
+      in
+      lines
+      }
+
+      ${let
+          lines = builtins.concatStringsSep "\n" (map (x:
+            let
+              lines2 = builtins.concatStringsSep "\n" (map (y:
+                let
+                  display = x.display;
+                  defaultmon = if y ? default then (if y.default then "true" else "false") else "false";
+                  workspacenum = builtins.toString y.number;
+                in
+                "workspace = ${workspacenum}, monitor:${display}, default:${defaultmon}") x.workspaces);
+            in
+            lines2
+            ) config.base.monitors.workspaces.displayAssociation);
+        in
+        lines
+
+      }
 
       ${let x = config.base.monitors.defaultMonitor; in
             let

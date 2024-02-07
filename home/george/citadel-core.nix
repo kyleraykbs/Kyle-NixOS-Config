@@ -55,6 +55,11 @@
     monitors = [
       {resolution="3840x2160"; framerate=60; position="0x0"; adapter="HDMI-A-1"; scale=2; transform=0;}
     ];
+    workspaces = {
+      displayAssociation = [
+        {display="HDMI-A-1"; workspaces=[{number=1; default=true;} {number=2; default=false;} {number=3; default=false;} {number=4; default=true;} {number=5; default=false;} {number=6; default=false;} {number=7; default=true;} {number=8; default=false;} {number=9; default=false;}];}
+      ];
+    };
   };
 
   base.hyprland.config.dwindle = {

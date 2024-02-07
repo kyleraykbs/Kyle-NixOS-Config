@@ -114,28 +114,20 @@ in
     monitors = [
       #{adapter="HDMI-A-1"; resolution="1920x1080"; framerate=60; position="0x0";}
       {adapter="DP-1"; resolution="1920x1080"; framerate=60; position="1920x0";}
-      {adapter="HDMI-A-1"; resolution="1920x1080"; framerate=120; position="3840x0";}
+      {adapter="DP-2"; resolution="1920x1080"; framerate=120; position="3840x0";}
       {adapter="DVI-D-1"; resolution="1920x1080"; framerate=60; position="5760x0";}
     ];
     workspaces = {
-      mouseBased = true;
+      displayAssociation = [
+        {display="DP-2"; workspaces=[{number=1; default=true;} {number=2; default=false;} {number=3; default=false;}];}
+        {display="DVI-D-1"; workspaces=[{number=4; default=true;} {number=5; default=false;} {number=6; default=false;}];}
+        {display="DP-1"; workspaces=[{number=7; default=true;} {number=8; default=false;} {number=9; default=false;}];}
+      ];
     };
     #defaultMonitor = {resolution="default"; mirroring="DVI-D-2";};
   };
   base.hyprland.extraConfig = ''
     ## REGULAR
-    workspace = 1, monitor:DP-2, default:true
-    workspace = 2, monitor:DP-2, default:false
-    workspace = 3, monitor:DP-2, default:false
-
-    workspace = 4, monitor:HDMI-A-1, default:true
-    workspace = 5, monitor:HDMI-A-1, default:false
-    workspace = 6, monitor:DVI-D-1, default:false
-
-    workspace = 7, monitor:HDMI-A-1, default:true
-    workspace = 8, monitor:HDMI-A-1, default:false
-    workspace = 9, monitor:HDMI-A-1, default:false
-
     bind = , code:90, workspace, 1
     bind = , code:87, workspace, 1
     bind = , code:88, workspace, 2
