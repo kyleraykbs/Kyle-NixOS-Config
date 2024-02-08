@@ -138,7 +138,8 @@
   services.gvfs.enable = true;
   services.tumbler.enable = true;
   security.polkit.enable = true;
-  services.gnome.gnome-keyring.enable = true;
+
+  base.authentication.enable = true;
 
   networking.firewall.enable = false;
 

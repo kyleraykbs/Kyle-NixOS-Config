@@ -30,48 +30,6 @@ rec {
         type=types.string;
     };
 
-    virtualmachines = mkOption {
-      type = types.listOf types.attrs;
-      default = [
-        # TEMPLATE OPTIONS
-        /*
-          {
-            name = "vm-template";
-            storage = {
-              devices = [
-                {
-                    path="/home/someone/somfile";
-                    type="disk"; # disk, cdrom, etc (finish documenting this)
-                    mountpoint="sda"; # sda sdb sdc, etc
-                    id="0"; # add one every new disk
-                }
-              ];
-            };
-            input = {
-                keyboard = "/dev/input/by-id/XYZ-event-kbd";
-                mouse = "/dev/input/by-id/XYZ-event-mouse";
-            };
-            passthrough = {
-                devices = [
-                    {
-                        # lspci -nn
-                        #   05:00.1
-                        #   ^^    ^
-                        # ADDRESS Sub Address
-                        address = "05";
-                        subaddress = "1";
-                        virtaddress = "12"; # starts at 12 add 1 for each device
-                    }
-                ];
-            };
-            cpu = {
-              cores = 11;
-            };
-          }
-        */
-      ];
-    };
-
     vfioids = mkOption {
       type = types.listOf types.str;
       default = [

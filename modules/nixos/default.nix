@@ -14,6 +14,7 @@
     ./bluetooth.nix
     ./hardware/intel.nix
     ./hardware/amd.nix
+    ./authentication.nix
     ../../shared.nix
   ];
 }
