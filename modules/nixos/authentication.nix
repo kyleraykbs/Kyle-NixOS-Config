@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   inherit (lib)
     mkEnableOption
@@ -14,12 +14,18 @@ in
 
   config = mkIf cfg.enable {
     services.gnome.gnome-keyring.enable = true;
-    security.pam.services.greetd.enableGnomeKeyring = true;
-    security.pam.services.sddm.enableGnomeKeyring = true;
-    programs.ssh.startAgent = true;
+
+    programs.gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      enableBrowserSocket = true;
+      enableExtraSocket = true;
+      pinentryFlavor = "gnome3";
+    };
+    programs.ssh.startAgent = false;
 
     services.openssh = {
-      enable = true;
+      # enable = true;
       # require public key authentication for better security
       #settings.PasswordAuthentication = false;
       #settings.KbdInteractiveAuthentication = false;

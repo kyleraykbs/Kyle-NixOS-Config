@@ -12,8 +12,6 @@
   home.packages = with pkgs; [
     terminator
     arduino
-    cemu
-    yuzu
     openscad
     prusa-slicer
     qogir-icon-theme
@@ -34,6 +32,8 @@
     obsidian
     libreoffice
   ];
+
+  base.vscode.enable = true;
 
   base.neovim = {
     enable = true;
@@ -95,7 +95,6 @@
       };
     };
   };
-
   base.monitors = {
     monitors = [
       {adapter="eDP-1"; resolution="1600x900"; framerate=60; position="0x0";}
@@ -104,7 +103,6 @@
   };
 
   base.hyprland.extraConfig = ''
-    bind = $mainMod, ESCAPE, exec, kitty sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"
     monitor=eDP-1, 1600x900, auto, 1
     monitor=,highres,auto,1,mirror,eDP-1
   '';
@@ -125,7 +123,7 @@
     bind = $mainMod, C, killactive,
     bind = $mainMod, M, exit,
     bind = $mainMod, SPACE, togglefloating,
-    bind = $mainMod, R, exec, ulauncher-toggle
+    bind = $mainMod, R, exec, rofi -show drun -theme .config/rofi/main.rasi
     bind = $mainMod, F, fullscreen, # dwindle
     bind = $mainMod, J, togglesplit, # dwindle
 
@@ -218,7 +216,7 @@
 
     git = {
       enable = true;
-      userName = "Kyle";
+      userName = "kyleraykbs";
       userEmail = "kyleraykbs@proton.me";
     };
   };
